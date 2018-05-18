@@ -1,0 +1,5 @@
+"0","library(vegan) "
+"0","#Distancia Euclidiana"
+"0","mdsE <- metaMDS(dens3, distance = ""euc"", autotransform = FALSE, trace = 0) "
+"0","#Distancia de Bray-Curtis"
+"0","mdsB <- metaMDS(dens3, distance = ""bray"", autotransform = FALSE, trace = 0) "

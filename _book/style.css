@@ -1,0 +1,32 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+div.FOO {
+font: 10px;
+  color:#fcfcfc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #001019;
+  background-color:#000407;
+  padding: 2px 3px;
+  position:relative;
+  display: inline-block;
+  margin: 2px;
+  text-align:center;
+}

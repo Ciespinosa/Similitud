@@ -1,0 +1,176 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Similitud de Comunidades biológicas},
+            pdfauthor={Carlos Iván Espinosa},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Similitud de Comunidades biológicas}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Carlos Iván Espinosa}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{Octubre 2016}
+
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter*{Prefacio}\label{prefacio}
+\addcontentsline{toc}{chapter}{Prefacio}
+
+Placeholder
+
+\chapter{Introducción}\label{introduccion}
+
+Placeholder
+
+\chapter{Ejercicio práctico}\label{ejercicio-practico}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\chapter{Enunciado}\label{enunciado}
+
+Una de las preguntas básicas de un ecólogo es saber ¿Cómo de diferentes
+son dos comunidades?. Como hemos visto en el capítulo anterior existen
+varias decisiones que los investigadores debemos tomar, estas decisiones
+afectan directamente a los resultados que podemos obtener y por ende a
+las conclusiones biológicas que obtenemos de este análisis.
+
+El presente ejercicio evaluaremos como las diferentes desiciones que
+tomamos entorno al procesamiento de datos afectan nuestras medidas de
+similitud, y cuales son las conclusiones biológicas que obtenemos con
+uno u otro procedimiento. En la tabla \ref{tab:ejer1} mostramos cinco
+comunidades hipotéticas.
+
+\begin{table}
+
+\caption{\label{tab:ejer1}Comunidades hipotéticas}
+\centering
+\begin{tabular}[t]{lrrrrrrrr}
+\toprule
+  & sp1 & sp2 & sp3 & sp4 & sp5 & sp6 & sp7 & sp8\\
+\midrule
+A & 26 & 17 & 16 & 1995 & 159 & 0 & 362 & 0\\
+B & 0 & 35 & 14 & 236 & 54 & 0 & 496 & 57\\
+C & 24 & 0 & 26 & 17 & 88 & 18 & 907 & 20\\
+D & 35 & 18 & 24 & 2033 & 175 & 15 & 376 & 16\\
+E & 105 & 129 & 40 & 18 & 191 & 53 & 964 & 134\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Con los datos anteriores:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  Convierta los datos en abundancia relativa por especie (la suma en
+  cada especie debe ser igual a 1). Dibuje dos gráficas para
+  representar; i) la abundancia total y ii) abundancia relativa de cada
+  localidad. ¿Qué diferencias puede ver en la gráfica i y en la ii?¿Qué
+  implicaciones biológicas podría tener si utilizamos la primera o la
+  segunda matriz para calcular las similitudes?
+\item
+  Calcule la distancia Euclideana y de Bray Curtis para cada sitio con
+  las dos medidas de abundancia y grafíquelas utilizando el NMDS. ¿Cómo
+  cambia entre distancias y abundancias? ¿Por qué se dan estas
+  diferencias? ¿Puede darle una explicación biológica a los diferentes
+  resultados?
+\item
+  Evalúe la similitud (Sorensen) y el porcentaje de similitud entre
+  pares de sitios. ¿Cuáles son los sitios más similares? ¿Cuál es la
+  razón de las diferencias entre los índices utilizados? ¿De una
+  interpretación biológica a estos resultados?
+\end{enumerate}
+
+\chapter{Metodología}\label{metodologia}
+
+Procese los datos como se explica en el enunciado y conteste las
+preguntas. A partir de estas preguntas prepare un reporte técnico en el
+cual usted explique las diferencias que existen entre las diferentes
+respuestas que tuvo y sus implicaciones biológicas.
+
+\bibliography{packages.bib}
+
+
+\end{document}
