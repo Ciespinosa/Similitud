@@ -22,13 +22,13 @@ text(seq(5,45, by=10),rep(0.20, 5),LETTERS[1:5], cex=1.5, font=2, col="white")
 
 Como podemos ver en la figura \@ref(fig:com), en cada uno de los transectos (representados por la línea gris), la ocurrencia de las especies y su abundancia cambia. Por ejemplo, en la comunidad "B" tenemos cinco especies, la especie representada por la línea verde alcanza su máxima abundancia, mientras que la representada por la línea azul se encuentra con una abundancia muy baja. En la comunidad "C" tenemos cuatro especies pero las abundancias son diferentes a las encontradas en la comunidad "B". En el caso de la comunidad "C", no solo las abundancias varían sino también la ocurrencia de especies.
 
-Los cambios en la estructura y composición de la comunidad hacen que ciertos transectos sean más parecidos y que otros sean más distintos, en el caso del ejemplo es clara o más o menos claras las similitudes en cuanto a estructura y composición de las especies, sin embargo, en la realidad es más complejo determinar a simple vista estas similitudes. A continuación veremos que métodos se usan para cuantificar estas similitudes.
+Los cambios en la estructura y composición de la comunidad hacen que ciertos transectos sean más parecidos y que otros sean distintos, en el caso del ejemplo es clara o más o menos clara las similitudes en cuanto a estructura y composición de las especies, sin embargo, en la realidad es más complejo determinar a simple vista estas similitudes. A continuación, veremos que métodos se usan para cuantificar estas similitudes.
 
 ------
 
 #Similitud, disimilitud y distancia
 
-Pensemos que dos elementos se parecen más, cuando sus propiedades son más parecidas, en este dos comunidades se parecerán más si su composición y estructura es parecida. La _similitud_ nos permite entonces tener un valor que define en qué medida dos comunidades se parecen. Aunque esta información es interesante, cuando se analizan muchas comunidades, el apreciar estas diferencias en cada par sería complejo, por lo que interesa poder representar estas comunidades en un plano. La graficación de las comunidades en un plano es posible si disponemos de medidas de __distancias__ entre las comunidades. Las distancias pueden ser medidas a través de distancias simétricas (ejemplo Euclideana, Hellinger), o a través de medidas asimétricas (medidas de __disimilitud__), la otra cara de la similitud. 
+Dos elementos se parecen más cuando sus propiedades son más parecidas, por ejemplo si existen dos bosques dominados por Eucaliptus serán más parecidos entre ellos que con un bosque donde el guayacan sea dominante. Es decir, dos comunidades se parecerán más si su composición y estructura es similar. El cálculo de _similitud_ nos permite cuantificar en qué medida dos comunidades se parecen. Aunque esta información es interesante, cuando se analizan muchas comunidades, el apreciar estas diferencias entre cada par sería complejo, por lo que interesa poder representar estas comunidades en un plano. La graficación de las comunidades en un plano es posible si disponemos de medidas de __distancias__ entre las comunidades. Las distancias es una medida de cuan diferentes son las comunidades entre sí y pueden ser medidas a través de diferentes medidas como; distancias simétricas (ejemplo Euclideana, Hellinger), o a través de medidas asimétricas (medidas de __disimilitud__, la otra cara de la similitud). 
 
 
 #Índices de Similitud 
@@ -42,7 +42,7 @@ row.names(dens) <- LETTERS[1:4]
 dens
 ```
 
-Generamos un gráfico para ver cuánto se parece cada sitio (Figura \@ref(fig:NMDS)) basado en las dos primeras especies.
+Generamos un gráfico basado en las dos primeras especies para ver cuánto se parece cada sitio (Figura \@ref(fig:NMDS)).
 
 ```{r NMDS, fig.cap = "Similitud de cuatro localidades hipotéticas",  fig.height=3, fig.width=3}
 par(mar=c(4,4,1,1), mgp=c(1,0.3,0), tcl= -0.2)
@@ -54,7 +54,7 @@ En la figura \@ref(fig:NMDS) vemos que la composición de especies en el sitio A
 
 ##Índices cualitativos 
 
-Los índices cualitativos son una medida que nos permite evaluar la similitud entre comunidades basados en presencia-ausencia de especies. A continuación veremos tres diferentes índices:
+Los índices cualitativos o de incidencia, son una medida que nos permite evaluar la similitud entre comunidades basados en presencia-ausencia de especies. A continuación veremos tres diferentes índices:
 
 > <small>$$S_s= \frac{(2c)}{(a+b+2c)}$$
     Índice de Sorensen</small>
@@ -75,7 +75,7 @@ comp[comp>0] <- 1 #Generamos una matriz de presencia ausencia
 comp
 
 a <- sum(colSums(comp[1:2,])==1&comp[2,]==0)#Ocurren en A pero no en B
-b <- sum(colSums(comp[1:2,])==1&comp[1,]==FALSE)#Ocurren en B pero no en A
+b <- sum(colSums(comp[1:2,])==1&comp[1,]==0)#Ocurren en B pero no en A
 c <- sum(colSums(comp[1:2,])==2) #ocurren en A y B
 
 a;b;c
@@ -118,7 +118,7 @@ Esto significa que la comunidad A y B tienen un porcentaje de similitud del 39%.
 
 #Distancias entre sitios
 
-Cuando tenemos dos comunidades muy parecidas entre sí tendremos valores altos de similitud, en contraposición los índices de distancia nos mostrarán valores altos cuando dos comunidades se parecen poco. Como habíamos mencionado anteriormente existes dos tipos de medidas de distancia;
+Cuando tenemos dos comunidades muy parecidas entre sí tendremos valores altos de similitud, en contraposición los índices de distancia nos mostrarán valores altos cuando dos comunidades se parecen poco. Como habíamos mencionado anteriormente existen dos tipos de medidas de distancia;
 
 - aquellas calculadas a partir de los índices de similitud usualmente como D= 1-Similitud. Así, para los índices de incidencia (presencia - ausencia) se pueden usar los índices de Jacard, Simpson o Sorensen, mientras que para los índices cuantitativos se puede usar el porcentaje de similitud, este último conocido como distancia de Bray Curtis.
 
@@ -159,17 +159,19 @@ Si bien este cálculo es sencillo con dos especies, si tenemos que calcular la d
 
 ###Efecto de doble-ceros y abundancia
 
-Aunque la distancia Euclidiana es fácilmente interpretable, es poco usado en análisis biológicos. Normalmente los datos de comunidad están caracterizados por una gran cantidad de ceros (especies no encontradas en determinados sitios), el cálculo de la distancia Euclidiana incrementa la similitud entre comunidades que presentan ceros en la misma especie.
+Aunque la distancia Euclidiana es fácilmente interpretable, es poco usado en análisis biológicos. Normalmente los datos de comunidad están caracterizados por una gran cantidad de ceros (especies no encontradas en determinados sitios), el cálculo de la distancia Euclidiana incrementa la similitud entre comunidades que presentan ceros para la misma especie.
 
  
 ```{r, echo=FALSE}
 dcMat <- data.frame(spp1=c(1,0,0),spp2=c(1,1,0),
                     spp3=c(0,1,0),sp4=c(0,1,0),
                     spp5=c(0,1,1), spp6=c(0,0,1))
+rownames(dcMat) <- LETTERS[1:3]
 
 kable(dcMat, caption = "Efecto del doble cero")
 
 ```
+
 Según los datos mostrados en la tabla tendríamos que hay un gradiente, la primera comunidad comparte una especie con la comunidad dos y la comunidad dos comparte una especie con la comunidad tres. Los índices deberían permitir recuperar ese gradiente, veamos lo que pasa.
 
 ```{r}
@@ -177,13 +179,19 @@ library(vegan)
 vegdist(dcMat, "euclidean")
 ```
 
-Como vemos, en el caso del ejemplo el doble cero de la comunidad uno y tres generan una mayor similitud, por lo que las tres comunidades son mostradas a igual distancia. Esto no debería ser un problema, si el cero realmente nos da información, pero en el caso de datos biológicos la razón de tener ese cero puede deberse a varias razones, por lo que realmente el cero no es informativo. En otros casos, normalmente en datos abióticos, el cero implica la ausencia de algo, por ejemplo tener cero mg de un contaminante es una información. De esta forma la distancia Euclidiana es usada sobre todo para interpretar datos ambientales.
+Como vemos en el ejemplo, el doble cero de la comunidad A y C generan una mayor similitud, de esta forma, las tres comunidades son mostradas a igual distancia. 
 
-Otra característica importante de la distancia euclidiana es que está fuertemente impactada por la diferencia de abundancias, recordemos que la diferencia de abundancias esta elevada al cuadrado, de esta forma la distancia entre dos comunidades puede estar marcada por la diferencia en abundancias más que por la diferencia en presencia de especies.
+Esto no debería ser un problema si el cero  nos diese información consistente. En el caso de datos biológicos el tener un valor de cero puede deberse a varias razones, por ejemplo puede ser que aunque la especie ocurre en ese lugar no pudo ser muestreada, o realmente no ocurre en ese lugar por restricciones abióticas, de esta forma el cero no es informativo y no podemos usarlo para generar matrices de distancias. En otros casos, normalmente en datos abióticos, el cero implica la ausencia de algo, por ejemplo tener cero mg de un contaminante es una información. De esta forma la distancia Euclidiana es usada sobre todo para interpretar datos ambientales.
+
+###Efecto de la abundancia
+
+Otra característica importante de la distancia euclidiana es que está fuertemente impactada por la diferencia de abundancias entre especies. El cálculo de esta distancia eleva al cuadrado las abundancias, por lo que el impacto de las especies dominantes es desproporcionada. En otras palabras la distancia euclideana incrementa el efecto de de las especies dominantes. Veamos a que nos referimos en el siguiente ejemplo.
 
 ```{r}
 dcMat2 <- data.frame(spp1=c(0,1,0),spp2=c(1,0,8),
                     spp3=c(1,0,7))
+
+rownames(dcMat2) <- LETTERS[1:3]
 
 kable(dcMat2, caption = "Efecto de la abundancia")
 ```
@@ -192,7 +200,7 @@ kable(dcMat2, caption = "Efecto de la abundancia")
 vegdist(dcMat2, "euclidean")
 ```
 
-Como vemos la comunidad uno se encuentra más cercana a la comunidad dos que a la tres. La distancia de la comunidad uno a la tres es de 9.21, aunque comparten dos especies la diferencia en abundancias es muy marcada. Por otro lado, la comunidad uno tiene una distancia de 1.73 a la comunidad dos, esta menor distancia se da aunque no comparten ninguna especie.
+Como vemos la distancia de la comunidad A a la B es de 9.21, aunque comparten dos especies, la diferencia en abundancias entre estas dos comunidades es muy marcada generando un incremento en la distancia. Por otro lado, la comunidad A tiene una distancia de 1.73 a la comunidad B, esta menor distancia se da aunque no comparten ninguna especie. Como vemos el efecto en la diferencia de abundancias tiene un fuerte impacto sobre el cálculo de distancias.
 
 ##Distancia Bray-Curtis
 
@@ -296,11 +304,11 @@ text(dens4, row.names(dens4), col ="blue")
 
 En la figura \@ref(fig:NMDS3) podemos apreciar que no hay diferencias entre las dos densidades cuando estoy usando la densidad relativa. Pero ¿Qué implicaciones biológicas tiene el usar las densidades relativas para calcular la distancia entre sitios?
 
-Cuando usamos las densidades relativas estamos dando el mismo peso a todas las especies. En un ecosistema con una especie dominante y varias subordinadas, al usar la densidad relativa estoy eliminando esa dominancia. Es importante tener claro este punto, ya que las interpretaciones que puedo hacer con los datos de densidad y densidad relativa son distintos.
+Cuando usamos las densidades relativas estamos dando el mismo peso a todas las especies. En un ecosistema con una especie dominante y varias subordinadas, al usar la densidad relativa estoy eliminando esa dominancia. Es importante tener claro este punto, ya que las interpretaciones que puedo hacer con los datos de abundancia y abundancia relativa son distintos.
 
 ##Transformación de datos
 
-Como vemos la magnitud de las diferencias entre las variables tiene un impacto sobre el cálculo de la distancia, por lo que nos interesa poder manejar el efecto de esas diferencias, para lo cual desarrollamos una transformación.
+Como vemos la magnitud de las diferencias entre las variables tiene un impacto sobre el cálculo de la distancia, nos interesa poder manejar el efecto de esas diferencias, para lo cual desarrollamos una transformación.
 
 La transformación de datos implica una modificación de los datos brutos a través de una ecuación algebraica. La transformación de datos implica una modificación independientemente para cada dato, no existe influencia del resto de datos. 
 
