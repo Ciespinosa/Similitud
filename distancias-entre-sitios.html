@@ -108,6 +108,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="4" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html"><i class="fa fa-check"></i><b>4</b> Distancias entre sitios</a><ul>
 <li class="chapter" data-level="4.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-euclidiana"><i class="fa fa-check"></i><b>4.1</b> Distancia Euclidiana</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-doble-ceros-y-abundancia"><i class="fa fa-check"></i><b>4.1.1</b> Efecto de doble-ceros y abundancia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-la-abundancia"><i class="fa fa-check"></i><b>4.1.2</b> Efecto de la abundancia</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-bray-curtis"><i class="fa fa-check"></i><b>4.2</b> Distancia Bray-Curtis</a></li>
 </ul></li>
@@ -138,7 +139,7 @@ code > span.in { color: #008000; } /* Information */
             <section class="normal" id="section-">
 <div id="distancias-entre-sitios" class="section level1">
 <h1><span class="header-section-number">Capítulo 4</span> Distancias entre sitios</h1>
-<p>Cuando tenemos dos comunidades muy parecidas entre sí tendremos valores altos de similitud, en contraposición los índices de distancia nos mostrarán valores altos cuando dos comunidades se parecen poco. Como habíamos mencionado anteriormente existes dos tipos de medidas de distancia;</p>
+<p>Cuando tenemos dos comunidades muy parecidas entre sí tendremos valores altos de similitud, en contraposición los índices de distancia nos mostrarán valores altos cuando dos comunidades se parecen poco. Como habíamos mencionado anteriormente existen dos tipos de medidas de distancia;</p>
 <ul>
 <li><p>aquellas calculadas a partir de los índices de similitud usualmente como D= 1-Similitud. Así, para los índices de incidencia (presencia - ausencia) se pueden usar los índices de Jacard, Simpson o Sorensen, mientras que para los índices cuantitativos se puede usar el porcentaje de similitud, este último conocido como distancia de Bray Curtis.</p></li>
 <li><p>aquellas que no tienen medidas de similitud análogas, algunos de estos índices son; Euclidiana, Chord, Hellinger.</p></li>
@@ -166,11 +167,12 @@ code > span.in { color: #008000; } /* Information */
 </blockquote>
 <div id="efecto-de-doble-ceros-y-abundancia" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Efecto de doble-ceros y abundancia</h3>
-<p>Aunque la distancia Euclidiana es fácilmente interpretable, es poco usado en análisis biológicos. Normalmente los datos de comunidad están caracterizados por una gran cantidad de ceros (especies no encontradas en determinados sitios), el cálculo de la distancia Euclidiana incrementa la similitud entre comunidades que presentan ceros en la misma especie.</p>
+<p>Aunque la distancia Euclidiana es fácilmente interpretable, es poco usado en análisis biológicos. Normalmente los datos de comunidad están caracterizados por una gran cantidad de ceros (especies no encontradas en determinados sitios), el cálculo de la distancia Euclidiana incrementa la similitud entre comunidades que presentan ceros para la misma especie.</p>
 <table>
 <caption><span id="tab:unnamed-chunk-9">Table 4.1: </span>Efecto del doble cero</caption>
 <thead>
 <tr class="header">
+<th></th>
 <th align="right">spp1</th>
 <th align="right">spp2</th>
 <th align="right">spp3</th>
@@ -181,6 +183,7 @@ code > span.in { color: #008000; } /* Information */
 </thead>
 <tbody>
 <tr class="odd">
+<td>A</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -189,6 +192,7 @@ code > span.in { color: #008000; } /* Information */
 <td align="right">0</td>
 </tr>
 <tr class="even">
+<td>B</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">1</td>
@@ -197,41 +201,42 @@ code > span.in { color: #008000; } /* Information */
 <td align="right">0</td>
 </tr>
 <tr class="odd">
+<td>C</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">1</td>
-</tr>
-<tr class="even">
-<td align="right">Según l</td>
-<td align="right">os dato</td>
-<td align="right">s mostr</td>
-<td align="right">ados e</td>
-<td align="right">n la ta</td>
-<td align="right">bla tendríamos que hay un gradiente, la primera comunidad comparte una especie con la comunidad dos y la comunidad dos comparte una especie con la comunidad tres. Los índices deberían permitir recuperar ese gradiente, veamos lo que pasa.</td>
 </tr>
 </tbody>
 </table>
+<p>Según los datos mostrados en la tabla tendríamos que hay un gradiente, la primera comunidad comparte una especie con la comunidad dos y la comunidad dos comparte una especie con la comunidad tres. Los índices deberían permitir recuperar ese gradiente, veamos lo que pasa.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(vegan)</code></pre></div>
 <pre><code>## Loading required package: permute</code></pre>
 <pre><code>## Loading required package: lattice</code></pre>
 <pre><code>## This is vegan 2.5-2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vegdist</span>(dcMat, <span class="st">&quot;euclidean&quot;</span>)</code></pre></div>
-<pre><code>##   1 2
-## 2 2  
-## 3 2 2</code></pre>
-<p>Como vemos, en el caso del ejemplo el doble cero de la comunidad uno y tres generan una mayor similitud, por lo que las tres comunidades son mostradas a igual distancia. Esto no debería ser un problema, si el cero realmente nos da información, pero en el caso de datos biológicos la razón de tener ese cero puede deberse a varias razones, por lo que realmente el cero no es informativo. En otros casos, normalmente en datos abióticos, el cero implica la ausencia de algo, por ejemplo tener cero mg de un contaminante es una información. De esta forma la distancia Euclidiana es usada sobre todo para interpretar datos ambientales.</p>
-<p>Otra característica importante de la distancia euclidiana es que está fuertemente impactada por la diferencia de abundancias, recordemos que la diferencia de abundancias esta elevada al cuadrado, de esta forma la distancia entre dos comunidades puede estar marcada por la diferencia en abundancias más que por la diferencia en presencia de especies.</p>
+<pre><code>##   A B
+## B 2  
+## C 2 2</code></pre>
+<p>Como vemos en el ejemplo, el doble cero de la comunidad A y C generan una mayor similitud, de esta forma, las tres comunidades son mostradas a igual distancia.</p>
+<p>Esto no debería ser un problema si el cero nos diese información consistente. En el caso de datos biológicos el tener un valor de cero puede deberse a varias razones, por ejemplo puede ser que aunque la especie ocurre en ese lugar no pudo ser muestreada, o realmente no ocurre en ese lugar por restricciones abióticas, de esta forma el cero no es informativo y no podemos usarlo para generar matrices de distancias. En otros casos, normalmente en datos abióticos, el cero implica la ausencia de algo, por ejemplo tener cero mg de un contaminante es una información. De esta forma la distancia Euclidiana es usada sobre todo para interpretar datos ambientales.</p>
+</div>
+<div id="efecto-de-la-abundancia" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Efecto de la abundancia</h3>
+<p>Otra característica importante de la distancia euclidiana es que está fuertemente impactada por la diferencia de abundancias entre especies. El cálculo de esta distancia eleva al cuadrado las abundancias, por lo que el impacto de las especies dominantes es desproporcionada. En otras palabras la distancia euclideana incrementa el efecto de de las especies dominantes. Veamos a que nos referimos en el siguiente ejemplo.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dcMat2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">spp1=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>),<span class="dt">spp2=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">8</span>),
                     <span class="dt">spp3=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">7</span>))
+
+<span class="kw">rownames</span>(dcMat2) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span>:<span class="dv">3</span>]
 
 <span class="kw">kable</span>(dcMat2, <span class="dt">caption =</span> <span class="st">&quot;Efecto de la abundancia&quot;</span>)</code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-11">Table 4.2: </span>Efecto de la abundancia</caption>
 <thead>
 <tr class="header">
+<th></th>
 <th align="right">spp1</th>
 <th align="right">spp2</th>
 <th align="right">spp3</th>
@@ -239,16 +244,19 @@ code > span.in { color: #008000; } /* Information */
 </thead>
 <tbody>
 <tr class="odd">
+<td>A</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
+<td>B</td>
 <td align="right">1</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
+<td>C</td>
 <td align="right">0</td>
 <td align="right">8</td>
 <td align="right">7</td>
@@ -256,10 +264,10 @@ code > span.in { color: #008000; } /* Information */
 </tbody>
 </table>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vegdist</span>(dcMat2, <span class="st">&quot;euclidean&quot;</span>)</code></pre></div>
-<pre><code>##           1         2
-## 2  1.732051          
-## 3  9.219544 10.677078</code></pre>
-<p>Como vemos la comunidad uno se encuentra más cercana a la comunidad dos que a la tres. La distancia de la comunidad uno a la tres es de 9.21, aunque comparten dos especies la diferencia en abundancias es muy marcada. Por otro lado, la comunidad uno tiene una distancia de 1.73 a la comunidad dos, esta menor distancia se da aunque no comparten ninguna especie.</p>
+<pre><code>##           A         B
+## B  1.732051          
+## C  9.219544 10.677078</code></pre>
+<p>Como vemos la distancia de la comunidad A a la B es de 9.21, aunque comparten dos especies, la diferencia en abundancias entre estas dos comunidades es muy marcada generando un incremento en la distancia. Por otro lado, la comunidad A tiene una distancia de 1.73 a la comunidad B, esta menor distancia se da aunque no comparten ninguna especie. Como vemos el efecto en la diferencia de abundancias tiene un fuerte impacto sobre el cálculo de distancias.</p>
 </div>
 </div>
 <div id="distancia-bray-curtis" class="section level2">
@@ -335,7 +343,7 @@ gitbook.start({
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Similitud.Rmd",
 "text": "Edit"
 },
-"download": ["Similitud.pdf"],
+"download": ["Similitud.epub"],
 "toc": {
 "collapse": "subsection"
 }

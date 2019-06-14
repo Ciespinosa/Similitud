@@ -109,7 +109,7 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
+\providecommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
@@ -211,11 +211,11 @@ encontradas en la comunidad ``B''. En el caso de la comunidad ``C'', no
 solo las abundancias varían sino también la ocurrencia de especies.
 
 Los cambios en la estructura y composición de la comunidad hacen que
-ciertos transectos sean más parecidos y que otros sean más distintos, en
-el caso del ejemplo es clara o más o menos claras las similitudes en
-cuanto a estructura y composición de las especies, sin embargo, en la
-realidad es más complejo determinar a simple vista estas similitudes. A
-continuación veremos que métodos se usan para cuantificar estas
+ciertos transectos sean más parecidos y que otros sean distintos, en el
+caso del ejemplo es clara o más o menos clara las similitudes en cuanto
+a estructura y composición de las especies, sin embargo, en la realidad
+es más complejo determinar a simple vista estas similitudes. A
+continuación, veremos que métodos se usan para cuantificar estas
 similitudes.
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
@@ -223,18 +223,21 @@ similitudes.
 \chapter{Similitud, disimilitud y
 distancia}\label{similitud-disimilitud-y-distancia}
 
-Pensemos que dos elementos se parecen más, cuando sus propiedades son
-más parecidas, en este dos comunidades se parecerán más si su
-composición y estructura es parecida. La \emph{similitud} nos permite
-entonces tener un valor que define en qué medida dos comunidades se
-parecen. Aunque esta información es interesante, cuando se analizan
-muchas comunidades, el apreciar estas diferencias en cada par sería
-complejo, por lo que interesa poder representar estas comunidades en un
-plano. La graficación de las comunidades en un plano es posible si
-disponemos de medidas de \textbf{distancias} entre las comunidades. Las
-distancias pueden ser medidas a través de distancias simétricas (ejemplo
+Dos elementos se parecen más cuando sus propiedades son más parecidas,
+por ejemplo si existen dos bosques dominados por Eucaliptus serán más
+parecidos entre ellos que con un bosque donde el guayacan sea dominante.
+Es decir, dos comunidades se parecerán más si su composición y
+estructura es similar. El cálculo de \emph{similitud} nos permite
+cuantificar en qué medida dos comunidades se parecen. Aunque esta
+información es interesante, cuando se analizan muchas comunidades, el
+apreciar estas diferencias entre cada par sería complejo, por lo que
+interesa poder representar estas comunidades en un plano. La graficación
+de las comunidades en un plano es posible si disponemos de medidas de
+\textbf{distancias} entre las comunidades. Las distancias es una medida
+de cuan diferentes son las comunidades entre sí y pueden ser medidas a
+través de diferentes medidas como; distancias simétricas (ejemplo
 Euclideana, Hellinger), o a través de medidas asimétricas (medidas de
-\textbf{disimilitud}), la otra cara de la similitud.
+\textbf{disimilitud}, la otra cara de la similitud).
 
 \chapter{Índices de Similitud}\label{indices-de-similitud}
 
@@ -266,8 +269,8 @@ localidades.
 ## D     3     5     5     4
 \end{verbatim}
 
-Generamos un gráfico para ver cuánto se parece cada sitio (Figura
-\ref{fig:NMDS}) basado en las dos primeras especies.
+Generamos un gráfico basado en las dos primeras especies para ver cuánto
+se parece cada sitio (Figura \ref{fig:NMDS}).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -291,9 +294,9 @@ dos sitios?
 
 \section{Índices cualitativos}\label{indices-cualitativos}
 
-Los índices cualitativos son una medida que nos permite evaluar la
-similitud entre comunidades basados en presencia-ausencia de especies. A
-continuación veremos tres diferentes índices:
+Los índices cualitativos o de incidencia, son una medida que nos permite
+evaluar la similitud entre comunidades basados en presencia-ausencia de
+especies. A continuación veremos tres diferentes índices:
 
 \begin{quote}
 \[S_s= \frac{(2c)}{(a+b+2c)}\] Índice de Sorensen
@@ -335,7 +338,7 @@ de los dos sitios.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{a <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{colSums}\NormalTok{(comp[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{,])==}\DecValTok{1}\NormalTok{&comp[}\DecValTok{2}\NormalTok{,]==}\DecValTok{0}\NormalTok{)}\CommentTok{#Ocurren en A pero no en B}
-\NormalTok{b <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{colSums}\NormalTok{(comp[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{,])==}\DecValTok{1}\NormalTok{&comp[}\DecValTok{1}\NormalTok{,]==}\OtherTok{FALSE}\NormalTok{)}\CommentTok{#Ocurren en B pero no en A}
+\NormalTok{b <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{colSums}\NormalTok{(comp[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{,])==}\DecValTok{1}\NormalTok{&comp[}\DecValTok{1}\NormalTok{,]==}\DecValTok{0}\NormalTok{)}\CommentTok{#Ocurren en B pero no en A}
 \NormalTok{c <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{colSums}\NormalTok{(comp[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{,])==}\DecValTok{2}\NormalTok{) }\CommentTok{#ocurren en A y B}
 
 \NormalTok{a;b;c}
@@ -400,7 +403,15 @@ suma de las abundancias de todas las especies en cada sitio.
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## Warning: package 'knitr' was built under R version 3.5.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{MatPS <-}\StringTok{ }\KeywordTok{rbind}\NormalTok{(dens[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{,], }\KeywordTok{apply}\NormalTok{(dens[}\DecValTok{1}\NormalTok{:}\DecValTok{2}\NormalTok{, ], }\DecValTok{2}\NormalTok{, min))}\CommentTok{#Obtenemos el valor mínimo de cada especie}
 \NormalTok{MatPS <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(MatPS, }\DataTypeTok{Medidas=}\KeywordTok{rowSums}\NormalTok{(MatPS), }\DataTypeTok{Tipo=} \KeywordTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"B"}\NormalTok{, }\StringTok{"W"}\NormalTok{)) }\CommentTok{#Obtenemos W,A,B}
 
@@ -408,11 +419,11 @@ suma de las abundancias de todas las especies en cada sitio.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-4}Medidas para obtener el porcentaje de Similitud}
 \centering
-\begin{tabular}[t]{l|r|r|r|r|r|l}
+\begin{tabular}{l|r|r|r|r|r|l}
 \hline
   & T.bil & G.spi & C.tri & C.sca & Medidas & Tipo\\
 \hline
@@ -447,7 +458,7 @@ similitud entre sitios.
 Cuando tenemos dos comunidades muy parecidas entre sí tendremos valores
 altos de similitud, en contraposición los índices de distancia nos
 mostrarán valores altos cuando dos comunidades se parecen poco. Como
-habíamos mencionado anteriormente existes dos tipos de medidas de
+habíamos mencionado anteriormente existen dos tipos de medidas de
 distancia;
 
 \begin{itemize}
@@ -541,22 +552,22 @@ Aunque la distancia Euclidiana es fácilmente interpretable, es poco
 usado en análisis biológicos. Normalmente los datos de comunidad están
 caracterizados por una gran cantidad de ceros (especies no encontradas
 en determinados sitios), el cálculo de la distancia Euclidiana
-incrementa la similitud entre comunidades que presentan ceros en la
+incrementa la similitud entre comunidades que presentan ceros para la
 misma especie.
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-9}Efecto del doble cero}
 \centering
-\begin{tabular}[t]{r|r|r|r|r|r}
+\begin{tabular}{l|r|r|r|r|r|r}
 \hline
-spp1 & spp2 & spp3 & sp4 & spp5 & spp6\\
+  & spp1 & spp2 & spp3 & sp4 & spp5 & spp6\\
 \hline
-1 & 1 & 0 & 0 & 0 & 0\\
+A & 1 & 1 & 0 & 0 & 0 & 0\\
 \hline
-0 & 1 & 1 & 1 & 1 & 0\\
+B & 0 & 1 & 1 & 1 & 1 & 0\\
 \hline
-0 & 0 & 0 & 0 & 1 & 1\\
+C & 0 & 0 & 0 & 0 & 1 & 1\\
 \hline
 \end{tabular}
 \end{table}
@@ -591,50 +602,59 @@ deberían permitir recuperar ese gradiente, veamos lo que pasa.
 \end{Shaded}
 
 \begin{verbatim}
-##   1 2
-## 2 2  
-## 3 2 2
+##   A B
+## B 2  
+## C 2 2
 \end{verbatim}
 
-Como vemos, en el caso del ejemplo el doble cero de la comunidad uno y
-tres generan una mayor similitud, por lo que las tres comunidades son
-mostradas a igual distancia. Esto no debería ser un problema, si el cero
-realmente nos da información, pero en el caso de datos biológicos la
-razón de tener ese cero puede deberse a varias razones, por lo que
-realmente el cero no es informativo. En otros casos, normalmente en
-datos abióticos, el cero implica la ausencia de algo, por ejemplo tener
-cero mg de un contaminante es una información. De esta forma la
-distancia Euclidiana es usada sobre todo para interpretar datos
-ambientales.
+Como vemos en el ejemplo, el doble cero de la comunidad A y C generan
+una mayor similitud, de esta forma, las tres comunidades son mostradas a
+igual distancia.
+
+Esto no debería ser un problema si el cero nos diese información
+consistente. En el caso de datos biológicos el tener un valor de cero
+puede deberse a varias razones, por ejemplo puede ser que aunque la
+especie ocurre en ese lugar no pudo ser muestreada, o realmente no
+ocurre en ese lugar por restricciones abióticas, de esta forma el cero
+no es informativo y no podemos usarlo para generar matrices de
+distancias. En otros casos, normalmente en datos abióticos, el cero
+implica la ausencia de algo, por ejemplo tener cero mg de un
+contaminante es una información. De esta forma la distancia Euclidiana
+es usada sobre todo para interpretar datos ambientales.
+
+\subsection{Efecto de la abundancia}\label{efecto-de-la-abundancia}
 
 Otra característica importante de la distancia euclidiana es que está
-fuertemente impactada por la diferencia de abundancias, recordemos que
-la diferencia de abundancias esta elevada al cuadrado, de esta forma la
-distancia entre dos comunidades puede estar marcada por la diferencia en
-abundancias más que por la diferencia en presencia de especies.
+fuertemente impactada por la diferencia de abundancias entre especies.
+El cálculo de esta distancia eleva al cuadrado las abundancias, por lo
+que el impacto de las especies dominantes es desproporcionada. En otras
+palabras la distancia euclideana incrementa el efecto de de las especies
+dominantes. Veamos a que nos referimos en el siguiente ejemplo.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dcMat2 <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{spp1=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{),}\DataTypeTok{spp2=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{8}\NormalTok{),}
                     \DataTypeTok{spp3=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{7}\NormalTok{))}
 
+\KeywordTok{rownames}\NormalTok{(dcMat2) <-}\StringTok{ }\NormalTok{LETTERS[}\DecValTok{1}\NormalTok{:}\DecValTok{3}\NormalTok{]}
+
 \KeywordTok{kable}\NormalTok{(dcMat2, }\DataTypeTok{caption =} \StringTok{"Efecto de la abundancia"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-11}Efecto de la abundancia}
 \centering
-\begin{tabular}[t]{r|r|r}
+\begin{tabular}{l|r|r|r}
 \hline
-spp1 & spp2 & spp3\\
+  & spp1 & spp2 & spp3\\
 \hline
-0 & 1 & 1\\
+A & 0 & 1 & 1\\
 \hline
-1 & 0 & 0\\
+B & 1 & 0 & 0\\
 \hline
-0 & 8 & 7\\
+C & 0 & 8 & 7\\
 \hline
 \end{tabular}
 \end{table}
@@ -646,17 +666,18 @@ spp1 & spp2 & spp3\\
 \end{Shaded}
 
 \begin{verbatim}
-##           1         2
-## 2  1.732051          
-## 3  9.219544 10.677078
+##           A         B
+## B  1.732051          
+## C  9.219544 10.677078
 \end{verbatim}
 
-Como vemos la comunidad uno se encuentra más cercana a la comunidad dos
-que a la tres. La distancia de la comunidad uno a la tres es de 9.21,
-aunque comparten dos especies la diferencia en abundancias es muy
-marcada. Por otro lado, la comunidad uno tiene una distancia de 1.73 a
-la comunidad dos, esta menor distancia se da aunque no comparten ninguna
-especie.
+Como vemos la distancia de la comunidad A a la B es de 9.21, aunque
+comparten dos especies, la diferencia en abundancias entre estas dos
+comunidades es muy marcada generando un incremento en la distancia. Por
+otro lado, la comunidad A tiene una distancia de 1.73 a la comunidad B,
+esta menor distancia se da aunque no comparten ninguna especie. Como
+vemos el efecto en la diferencia de abundancias tiene un fuerte impacto
+sobre el cálculo de distancias.
 
 \section{Distancia Bray-Curtis}\label{distancia-bray-curtis}
 
@@ -833,14 +854,14 @@ Cuando usamos las densidades relativas estamos dando el mismo peso a
 todas las especies. En un ecosistema con una especie dominante y varias
 subordinadas, al usar la densidad relativa estoy eliminando esa
 dominancia. Es importante tener claro este punto, ya que las
-interpretaciones que puedo hacer con los datos de densidad y densidad
-relativa son distintos.
+interpretaciones que puedo hacer con los datos de abundancia y
+abundancia relativa son distintos.
 
 \section{Transformación de datos}\label{transformacion-de-datos}
 
 Como vemos la magnitud de las diferencias entre las variables tiene un
-impacto sobre el cálculo de la distancia, por lo que nos interesa poder
-manejar el efecto de esas diferencias, para lo cual desarrollamos una
+impacto sobre el cálculo de la distancia, nos interesa poder manejar el
+efecto de esas diferencias, para lo cual desarrollamos una
 transformación.
 
 La transformación de datos implica una modificación de los datos brutos
@@ -848,11 +869,11 @@ a través de una ecuación algebraica. La transformación de datos implica
 una modificación independientemente para cada dato, no existe influencia
 del resto de datos.
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-15}Comunidad de macroinvertebrados acuáticos}
 \centering
-\begin{tabular}[t]{l|r|r|r|r|r|r|r|r|r|r|r}
+\begin{tabular}{l|r|r|r|r|r|r|r|r|r|r|r}
 \hline
 LOCALIDAD & Allu & Atop & Atri & Baet & Bezz & Blep & Cera & Chel & Chim & Chir & Cole\\
 \hline
@@ -929,11 +950,11 @@ Veamos un ejemplo:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-16}Efecto de la transformación. Pequeñas diferencias}
 \centering
-\begin{tabular}[t]{r|r|r|r|r|r}
+\begin{tabular}{r|r|r|r|r|r}
 \hline
 sp1. & sp2. & sp1.sqrt & sp2.sqrt & sp1.log & sp2.log\\
 \hline
@@ -969,11 +990,11 @@ sp1. & sp2. & sp1.sqrt & sp2.sqrt & sp1.log & sp2.log\\
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:unnamed-chunk-16}Efecto de la transformación, Grandes diferencias}
 \centering
-\begin{tabular}[t]{r|r|r|r|r|r}
+\begin{tabular}{r|r|r|r|r|r}
 \hline
 sp1. & sp2. & sp1.sqrt & sp2.sqrt & sp1.log & sp2.log\\
 \hline
@@ -1058,11 +1079,11 @@ similitud, y cuáles son las conclusiones biológicas que obtenemos con
 uno u otro procedimiento. En la tabla \ref{tab:ejer1} mostramos cinco
 comunidades hipotéticas.
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:ejer1}Comunidades hipotéticas}
 \centering
-\begin{tabular}[t]{lrrrrrrrr}
+\begin{tabular}{lrrrrrrrr}
 \toprule
   & sp1 & sp2 & sp3 & sp4 & sp5 & sp6 & sp7 & sp8\\
 \midrule

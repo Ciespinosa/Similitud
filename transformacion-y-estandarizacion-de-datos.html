@@ -108,6 +108,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="4" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html"><i class="fa fa-check"></i><b>4</b> Distancias entre sitios</a><ul>
 <li class="chapter" data-level="4.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-euclidiana"><i class="fa fa-check"></i><b>4.1</b> Distancia Euclidiana</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-doble-ceros-y-abundancia"><i class="fa fa-check"></i><b>4.1.1</b> Efecto de doble-ceros y abundancia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-la-abundancia"><i class="fa fa-check"></i><b>4.1.2</b> Efecto de la abundancia</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-bray-curtis"><i class="fa fa-check"></i><b>4.2</b> Distancia Bray-Curtis</a></li>
 </ul></li>
@@ -169,10 +170,10 @@ Figure 5.2: Distancias de cuatro localidades hipotéticas
 </p>
 </div>
 <p>En la figura <a href="transformacion-y-estandarizacion-de-datos.html#fig:NMDS3">5.2</a> podemos apreciar que no hay diferencias entre las dos densidades cuando estoy usando la densidad relativa. Pero ¿Qué implicaciones biológicas tiene el usar las densidades relativas para calcular la distancia entre sitios?</p>
-<p>Cuando usamos las densidades relativas estamos dando el mismo peso a todas las especies. En un ecosistema con una especie dominante y varias subordinadas, al usar la densidad relativa estoy eliminando esa dominancia. Es importante tener claro este punto, ya que las interpretaciones que puedo hacer con los datos de densidad y densidad relativa son distintos.</p>
+<p>Cuando usamos las densidades relativas estamos dando el mismo peso a todas las especies. En un ecosistema con una especie dominante y varias subordinadas, al usar la densidad relativa estoy eliminando esa dominancia. Es importante tener claro este punto, ya que las interpretaciones que puedo hacer con los datos de abundancia y abundancia relativa son distintos.</p>
 <div id="transformacion-de-datos" class="section level2">
 <h2><span class="header-section-number">5.1</span> Transformación de datos</h2>
-<p>Como vemos la magnitud de las diferencias entre las variables tiene un impacto sobre el cálculo de la distancia, por lo que nos interesa poder manejar el efecto de esas diferencias, para lo cual desarrollamos una transformación.</p>
+<p>Como vemos la magnitud de las diferencias entre las variables tiene un impacto sobre el cálculo de la distancia, nos interesa poder manejar el efecto de esas diferencias, para lo cual desarrollamos una transformación.</p>
 <p>La transformación de datos implica una modificación de los datos brutos a través de una ecuación algebraica. La transformación de datos implica una modificación independientemente para cada dato, no existe influencia del resto de datos.</p>
 <table>
 <caption><span id="tab:unnamed-chunk-15">Table 5.1: </span>Comunidad de macroinvertebrados acuáticos</caption>
@@ -635,7 +636,7 @@ gitbook.start({
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Similitud.Rmd",
 "text": "Edit"
 },
-"download": ["Similitud.pdf"],
+"download": ["Similitud.epub"],
 "toc": {
 "collapse": "subsection"
 }

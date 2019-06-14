@@ -108,6 +108,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="4" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html"><i class="fa fa-check"></i><b>4</b> Distancias entre sitios</a><ul>
 <li class="chapter" data-level="4.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-euclidiana"><i class="fa fa-check"></i><b>4.1</b> Distancia Euclidiana</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-doble-ceros-y-abundancia"><i class="fa fa-check"></i><b>4.1.1</b> Efecto de doble-ceros y abundancia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-la-abundancia"><i class="fa fa-check"></i><b>4.1.2</b> Efecto de la abundancia</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-bray-curtis"><i class="fa fa-check"></i><b>4.2</b> Distancia Bray-Curtis</a></li>
 </ul></li>
@@ -148,7 +149,7 @@ dens</code></pre></div>
 ## B     1     8     3     0
 ## C     2    13     7     9
 ## D     3     5     5     4</code></pre>
-<p>Generamos un gráfico para ver cuánto se parece cada sitio (Figura <a href="indices-de-similitud.html#fig:NMDS">3.1</a>) basado en las dos primeras especies.</p>
+<p>Generamos un gráfico basado en las dos primeras especies para ver cuánto se parece cada sitio (Figura <a href="indices-de-similitud.html#fig:NMDS">3.1</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mgp=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.3</span>,<span class="dv">0</span>), <span class="dt">tcl=</span> -<span class="fl">0.2</span>)
 <span class="kw">plot</span>(dens[,<span class="dv">1</span>:<span class="dv">2</span>], <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">25</span>)) 
 <span class="kw">text</span>(dens[,<span class="dv">1</span>:<span class="dv">2</span>], <span class="kw">row.names</span>(dens), <span class="dt">col =</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
@@ -161,7 +162,7 @@ Figure 3.1: Similitud de cuatro localidades hipotéticas
 <p>En la figura <a href="indices-de-similitud.html#fig:NMDS">3.1</a> vemos que la composición de especies en el sitio A es diferente de la composición del sitio D. Es decir, la similitud entre el sitio A y D es menor que entre los otros sitios. Lo siguiente que nos deberíamos preguntar es; ¿qué tan similares son los dos sitios?</p>
 <div id="indices-cualitativos" class="section level2">
 <h2><span class="header-section-number">3.1</span> Índices cualitativos</h2>
-<p>Los índices cualitativos son una medida que nos permite evaluar la similitud entre comunidades basados en presencia-ausencia de especies. A continuación veremos tres diferentes índices:</p>
+<p>Los índices cualitativos o de incidencia, son una medida que nos permite evaluar la similitud entre comunidades basados en presencia-ausencia de especies. A continuación veremos tres diferentes índices:</p>
 <blockquote>
 <p><small><span class="math display">\[S_s= \frac{(2c)}{(a+b+2c)}\]</span> Índice de Sorensen</small></p>
 <p><small><span class="math display">\[S_s= \frac{(c)}{(a+b+c)}\]</span> Índice de Jaccard</small></p>
@@ -178,7 +179,7 @@ comp</code></pre></div>
 ## C     1     1     1     1
 ## D     1     1     1     1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(comp[<span class="dv">1</span>:<span class="dv">2</span>,])==<span class="dv">1</span>&amp;comp[<span class="dv">2</span>,]==<span class="dv">0</span>)<span class="co">#Ocurren en A pero no en B</span>
-b &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(comp[<span class="dv">1</span>:<span class="dv">2</span>,])==<span class="dv">1</span>&amp;comp[<span class="dv">1</span>,]==<span class="ot">FALSE</span>)<span class="co">#Ocurren en B pero no en A</span>
+b &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(comp[<span class="dv">1</span>:<span class="dv">2</span>,])==<span class="dv">1</span>&amp;comp[<span class="dv">1</span>,]==<span class="dv">0</span>)<span class="co">#Ocurren en B pero no en A</span>
 c &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(comp[<span class="dv">1</span>:<span class="dv">2</span>,])==<span class="dv">2</span>) <span class="co">#ocurren en A y B</span>
 
 a;b;c</code></pre></div>
@@ -203,9 +204,9 @@ Sor; Jac; Sim</code></pre></div>
 <p><small><span class="math display">\[S_s= \frac{(2W)}{A+B}\]</span> Porcentaje de Similitud</small></p>
 </blockquote>
 <p>Donde; <em>W</em> es la sumatoria del valor mínimo de la abundancia entre las comunidades comparadas para cada especie. <em>A</em> y <em>B</em> es la suma de las abundancias de todas las especies en cada sitio.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
-
-MatPS &lt;-<span class="st"> </span><span class="kw">rbind</span>(dens[<span class="dv">1</span>:<span class="dv">2</span>,], <span class="kw">apply</span>(dens[<span class="dv">1</span>:<span class="dv">2</span>, ], <span class="dv">2</span>, min))<span class="co">#Obtenemos el valor mínimo de cada especie</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)</code></pre></div>
+<pre><code>## Warning: package &#39;knitr&#39; was built under R version 3.5.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MatPS &lt;-<span class="st"> </span><span class="kw">rbind</span>(dens[<span class="dv">1</span>:<span class="dv">2</span>,], <span class="kw">apply</span>(dens[<span class="dv">1</span>:<span class="dv">2</span>, ], <span class="dv">2</span>, min))<span class="co">#Obtenemos el valor mínimo de cada especie</span>
 MatPS &lt;-<span class="st"> </span><span class="kw">data.frame</span>(MatPS, <span class="dt">Medidas=</span><span class="kw">rowSums</span>(MatPS), <span class="dt">Tipo=</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;W&quot;</span>)) <span class="co">#Obtenemos W,A,B</span>
 
 <span class="kw">kable</span>(MatPS, <span class="dt">caption =</span> <span class="st">&quot;Medidas para obtener el porcentaje de Similitud&quot;</span>)</code></pre></div>
@@ -297,7 +298,7 @@ gitbook.start({
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Similitud.Rmd",
 "text": "Edit"
 },
-"download": ["Similitud.pdf"],
+"download": ["Similitud.epub"],
 "toc": {
 "collapse": "subsection"
 }
