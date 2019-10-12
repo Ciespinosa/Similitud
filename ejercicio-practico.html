@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Similitud de Comunidades biológicas</title>
+  <meta name="description" content="Similitud de Comunidades biológicas">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Similitud de Comunidades biológicas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Similitud de Comunidades biológicas" />
+  
+  
+  
+
+<meta name="author" content="Carlos Iván Espinosa">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="transformacion-y-estandarizacion-de-datos.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #0000ff; } /* Keyword */
+code > span.ch { color: #008080; } /* Char */
+code > span.st { color: #008080; } /* String */
+code > span.co { color: #008000; } /* Comment */
+code > span.ot { color: #ff4000; } /* Other */
+code > span.al { color: #ff0000; } /* Alert */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #008000; font-weight: bold; } /* Warning */
+code > span.cn { } /* Constant */
+code > span.sc { color: #008080; } /* SpecialChar */
+code > span.vs { color: #008080; } /* VerbatimString */
+code > span.ss { color: #008080; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #0000ff; } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ff4000; } /* Preprocessor */
+code > span.do { color: #008000; } /* Documentation */
+code > span.an { color: #008000; } /* Annotation */
+code > span.cv { color: #008000; } /* CommentVar */
+code > span.at { } /* Attribute */
+code > span.in { color: #008000; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Similitud de comunidades biológicas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
+<li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="1" data-path="introduccion.html"><a href="introduccion.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="similitud-disimilitud-y-distancia.html"><a href="similitud-disimilitud-y-distancia.html"><i class="fa fa-check"></i><b>2</b> Similitud, disimilitud y distancia</a></li>
+<li class="chapter" data-level="3" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html"><i class="fa fa-check"></i><b>3</b> Índices de Similitud</a><ul>
+<li class="chapter" data-level="3.1" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html#indices-cualitativos"><i class="fa fa-check"></i><b>3.1</b> Índices cualitativos</a></li>
+<li class="chapter" data-level="3.2" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html#indices-cuantitativos"><i class="fa fa-check"></i><b>3.2</b> Índices cuantitativos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html"><i class="fa fa-check"></i><b>4</b> Distancias entre sitios</a><ul>
+<li class="chapter" data-level="4.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-euclidiana"><i class="fa fa-check"></i><b>4.1</b> Distancia Euclidiana</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-doble-ceros-y-abundancia"><i class="fa fa-check"></i><b>4.1.1</b> Efecto de doble-ceros y abundancia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-la-abundancia"><i class="fa fa-check"></i><b>4.1.2</b> Efecto de la abundancia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-bray-curtis"><i class="fa fa-check"></i><b>4.2</b> Distancia Bray-Curtis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformacion-y-estandarizacion-de-datos.html"><a href="transformacion-y-estandarizacion-de-datos.html"><i class="fa fa-check"></i><b>5</b> Transformación y Estandarización de datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="transformacion-y-estandarizacion-de-datos.html"><a href="transformacion-y-estandarizacion-de-datos.html#transformacion-de-datos"><i class="fa fa-check"></i><b>5.1</b> Transformación de datos</a></li>
+<li class="chapter" data-level="5.2" data-path="transformacion-y-estandarizacion-de-datos.html"><a href="transformacion-y-estandarizacion-de-datos.html#estandarizacion-de-los-datos"><i class="fa fa-check"></i><b>5.2</b> Estandarización de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ejercicio-practico.html"><a href="ejercicio-practico.html"><i class="fa fa-check"></i><b>6</b> Ejercicio práctico</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Similitud de Comunidades biológicas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ejercicio-practico" class="section level1">
+<h1><span class="header-section-number">Capítulo 6</span> Ejercicio práctico</h1>
+<hr />
+<p>Una de las preguntas básicas de un ecólogo es saber ¿Cómo de diferentes son dos comunidades?. Como hemos visto existen varias decisiones que los investigadores debemos tomar, estas decisiones afectan directamente a los resultados que podemos obtener y por ende a las conclusiones biológicas que obtenemos de este análisis.</p>
+<p>En el presente ejercicio evaluaremos cómo las diferentes decisiones que tomamos entorno al procesamiento de datos afectan nuestras medidas de similitud, y cuáles son las conclusiones biológicas que obtenemos con uno u otro procedimiento. En la tabla <a href="ejercicio-practico.html#tab:ejer1">6.1</a> mostramos cinco comunidades hipotéticas.</p>
+<table>
+<caption><span id="tab:ejer1">Table 6.1: </span>Comunidades hipotéticas</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">sp1</th>
+<th align="right">sp2</th>
+<th align="right">sp3</th>
+<th align="right">sp4</th>
+<th align="right">sp5</th>
+<th align="right">sp6</th>
+<th align="right">sp7</th>
+<th align="right">sp8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td align="right">26</td>
+<td align="right">17</td>
+<td align="right">16</td>
+<td align="right">1995</td>
+<td align="right">159</td>
+<td align="right">0</td>
+<td align="right">362</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td align="right">0</td>
+<td align="right">35</td>
+<td align="right">14</td>
+<td align="right">236</td>
+<td align="right">54</td>
+<td align="right">0</td>
+<td align="right">496</td>
+<td align="right">57</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td align="right">24</td>
+<td align="right">0</td>
+<td align="right">26</td>
+<td align="right">17</td>
+<td align="right">88</td>
+<td align="right">18</td>
+<td align="right">907</td>
+<td align="right">20</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td align="right">35</td>
+<td align="right">18</td>
+<td align="right">24</td>
+<td align="right">2033</td>
+<td align="right">175</td>
+<td align="right">15</td>
+<td align="right">376</td>
+<td align="right">16</td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td align="right">105</td>
+<td align="right">129</td>
+<td align="right">40</td>
+<td align="right">18</td>
+<td align="right">191</td>
+<td align="right">53</td>
+<td align="right">964</td>
+<td align="right">134</td>
+</tr>
+</tbody>
+</table>
+<p>Convierta los datos de abundancia brindados en la tabla <a href="ejercicio-practico.html#tab:ejer1">6.1</a> en datos de abundancia relativa por cada sitio (la suma en cada sitio debe ser igual a 1). Dibuje dos gráficas para representar; i) la abundancia total y ii) abundancia relativa de cada localidad. En el ejercicio hemos calculado la abundancia relativa por especie y no por sitio. Para obtener la abundancia relativa por sitio use la siguiente línea de código:</p>
+<pre><code>objeto/rowSums(objeto)</code></pre>
+<p>Para realizar los gráficos con los datos de abundancia y abundancia relativa use la función <em>barplot</em> siguiendo la siguiente línea de código:</p>
+<pre><code>par(mfcol=c(2,1), mar=c(3,3,1,1))
+barplot(objeto, beside = T)
+barplot(objeto2, beside = T)
+</code></pre>
+<p>La función <em>par</em> se usa para dividir el área del gráfico en dos partes.</p>
+<blockquote>
+<p>objeto y objeto2 se refiere al objeto que contiene la matriz de con los datos de abundancia y abundancia relativa.</p>
+</blockquote>
+<p>Responda las siguientes preguntas:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>¿Qué diferencias puede ver en la gráfica con datos de abundancia y abundancia relativa?¿Qué implicaciones biológicas podría tener si utilizamos la primera o la segunda matriz para calcular las similitudes?</p></li>
+<li><p>Calcule las distancias Euclidiana y de Bray Curtis para cada sitio con las dos medidas de abundancia y grafíquelas utilizando el NMDS. ¿Cómo cambia entre distancias y abundancias? ¿Por qué se dan estas diferencias? ¿Puede darles una explicación biológica a los diferentes resultados?</p></li>
+<li><p>Evalúe la similitud (Sorensen) y el porcentaje de similitud entre pares de sitios. ¿Cuáles son los sitios más similares? ¿Cuál es la razón de las diferencias entre los índices utilizados? ¿De una interpretación biológica a estos resultados?</p></li>
+</ol>
+
+<div id="refs" class="references">
+<div>
+<p>Stevens, M. Henry H. 2009. <em>A Primer of Ecology with R</em>.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="transformacion-y-estandarizacion-de-datos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Similitud.Rmd",
+"text": "Edit"
+},
+"download": ["Similitud.pdf", "Similitud.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
