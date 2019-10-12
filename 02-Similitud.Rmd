@@ -400,10 +400,27 @@ knitr::kable(
 
 ```
 
-Con los datos anteriores:
+Convierta los datos de abundancia brindados en la tabla \@ref(tab:ejer1) en datos de abundancia relativa por cada sitio (la suma en cada sitio debe ser igual a 1). Dibuje dos gráficas para representar; i) la abundancia total y ii) abundancia relativa de cada localidad. En el ejercicio hemos calculado la abundancia relativa por especie y no por sitio. Para obtener la abundancia relativa por sitio use la siguiente línea de código:
 
-a. Convierta los datos en abundancia relativa por especie (la suma en cada especie debe ser igual a 1). Dibuje dos gráficas para representar; i) la abundancia total y ii) abundancia relativa de cada localidad. ¿Qué diferencias puede ver en la gráfica i y en la ii?¿Qué implicaciones biológicas podría tener si utilizamos la primera o la segunda matriz para calcular las similitudes?
+```
+objeto/rowSums(objeto)
+```
 
+Para realizar los gráficos con los datos de  abundancia y abundancia relativa use la función _barplot_ siguiendo la siguiente línea de código:
+
+```
+par(mfcol=c(2,1), mar=c(3,3,1,1))
+barplot(objeto, beside = T)
+barplot(objeto2, beside = T)
+
+```
+La función _par_ se usa para dividir el área del gráfico en dos partes. 
+
+>objeto y objeto2 se refiere al objeto que contiene la matriz de con los datos de abundancia y abundancia relativa.
+
+Responda las siguientes preguntas:
+
+a. ¿Qué diferencias puede ver en la gráfica con datos de abundancia y abundancia relativa?¿Qué implicaciones biológicas podría tener si utilizamos la primera o la segunda matriz para calcular las similitudes?
 
 b. Calcule las distancias Euclidiana y de Bray Curtis para cada sitio con las dos medidas de abundancia y grafíquelas utilizando el NMDS. ¿Cómo cambia entre distancias y abundancias? ¿Por qué se dan estas diferencias? ¿Puede darles una explicación biológica a los diferentes resultados?
 
