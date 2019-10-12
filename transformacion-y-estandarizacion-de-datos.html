@@ -99,9 +99,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
 <li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html"><i class="fa fa-check"></i>Objetivos</a></li>
-<li class="chapter" data-level="1" data-path="introduccion.html"><a href="introduccion.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduccion.html"><a href="introduccion.html#los-cambios-en-la-estructura-y-composicion-de-la-comunidad-hacen-que-ciertos-transectos-sean-mas-parecidos-entre-si-que-otros-en-el-caso-del-ejemplo-las-similitudes-en-cuanto-a-estructura-y-composicion-de-las-especies-son-mas-o-menos-claras-sin-embargo-en-la-realidad-es-mas-complejo-determinar-a-simple-vista-estas-similitudes.-a-continuacion-veremos-los-metodos-que-se-usan-para-cuantificar-estas-similitudes."><i class="fa fa-check"></i><b>1.1</b> Los cambios en la estructura y composición de la comunidad hacen que ciertos transectos sean más parecidos entre sí que otros, en el caso del ejemplo las similitudes en cuanto a estructura y composición de las especies son más o menos claras, sin embargo, en la realidad es más complejo determinar a simple vista estas similitudes. A continuación, veremos los métodos que se usan para cuantificar estas similitudes.</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="introduccion.html"><a href="introduccion.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
 <li class="chapter" data-level="2" data-path="similitud-disimilitud-y-distancia.html"><a href="similitud-disimilitud-y-distancia.html"><i class="fa fa-check"></i><b>2</b> Similitud, disimilitud y distancia</a></li>
 <li class="chapter" data-level="3" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html"><i class="fa fa-check"></i><b>3</b> Índices de Similitud</a><ul>
 <li class="chapter" data-level="3.1" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html#indices-cualitativos"><i class="fa fa-check"></i><b>3.1</b> Índices cualitativos</a></li>
@@ -153,7 +151,7 @@ dens1$T.bil &lt;-<span class="st"> </span>dens1$T.bil*<span class="dv">100</span
 <span class="kw">plot</span>(dens1[,<span class="dv">1</span>:<span class="dv">2</span>], <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">300</span>), <span class="dt">main=</span><span class="st">&quot;b.&quot;</span>) 
 <span class="kw">text</span>(dens1[,<span class="dv">1</span>:<span class="dv">2</span>], <span class="kw">row.names</span>(dens1), <span class="dt">col =</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:NMDS2"></span>
-<img src="Similitud_files/figure-html/NMDS2-1.png" alt="Distancias de cuatro localidades hipotéticas" width="288" />
+<img src="Similitud_files/figure-html/NMDS2-1.png" alt="Distancias de cuatro localidades hipotéticas" width="672" />
 <p class="caption">
 Figure 5.1: Distancias de cuatro localidades hipotéticas
 </p>
@@ -179,7 +177,7 @@ Figure 5.2: Distancias de cuatro localidades hipotéticas
 <p>La transformación de datos implica una modificación de los datos brutos a través de una ecuación algebraica. La transformación de datos implica una modificación independientemente para cada dato, no existe influencia del resto de datos.</p>
 <pre><code>## Warning: package &#39;readxl&#39; was built under R version 3.5.3</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-15">Table 5.1: </span>Comunidad de macroinvertebrados acuáticos</caption>
+<caption><span id="tab:unnamed-chunk-16">Table 5.1: </span>Comunidad de macroinvertebrados acuáticos</caption>
 <thead>
 <tr class="header">
 <th align="left">LOCALIDAD</th>
@@ -385,7 +383,7 @@ aveT &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw
 
 <span class="kw">kable</span>(aveT, <span class="dt">caption =</span> <span class="st">&quot;Efecto de la transformación. Pequeñas diferencias&quot;</span>)</code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-16">Table 5.2: </span>Efecto de la transformación. Pequeñas diferencias</caption>
+<caption><span id="tab:unnamed-chunk-17">Table 5.2: </span>Efecto de la transformación. Pequeñas diferencias</caption>
 <thead>
 <tr class="header">
 <th align="right">sp1.</th>
@@ -484,7 +482,7 @@ aveT &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw
 
 <span class="kw">kable</span>(insT, <span class="dt">caption =</span> <span class="st">&quot;Efecto de la transformación, Grandes diferencias&quot;</span>)</code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-16">Table 5.2: </span>Efecto de la transformación, Grandes diferencias</caption>
+<caption><span id="tab:unnamed-chunk-17">Table 5.2: </span>Efecto de la transformación, Grandes diferencias</caption>
 <thead>
 <tr class="header">
 <th align="right">sp1.</th>

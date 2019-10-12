@@ -23,6 +23,7 @@ text(seq(5,45, by=10),rep(0.20, 5),LETTERS[1:5], cex=1.5, font=2, col="white")
 Como podemos ver en la figura \@ref(fig:com), en cada uno de los transectos (representados por la línea gris), la ocurrencia de las especies y su abundancia cambia. Por ejemplo, en el transecto "B" la comunidad está representada por cinco especies, la especie representada por la línea verde alcanza su máxima abundancia, mientras que la representada por la línea azul se encuentra con una abundancia muy baja. En la comunidad "C" tenemos cuatro especies pero las abundancias son diferentes a las encontradas en la comunidad "B". En el caso de la comunidad "C", no solo las abundancias varían sino también la ocurrencia de especies.
 
 Los cambios en la estructura y composición de la comunidad hacen que ciertos transectos sean más parecidos entre sí que otros, en el caso del ejemplo las similitudes en cuanto a estructura y composición de las especies son más o menos claras, sin embargo, en la realidad es más complejo determinar a simple vista estas similitudes. A continuación, veremos los métodos que se usan para cuantificar estas similitudes.
+
 ------
 
 #Similitud, disimilitud y distancia
@@ -101,14 +102,16 @@ El *porcentaje de similitud* es la versión cuantitativa del índice de Sorensen
     
 Donde; _W_ es la sumatoria del valor mínimo de la abundancia entre las comunidades comparadas para cada especie. _A_  y _B_ es la suma de las abundancias de todas las especies en cada sitio. 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(knitr)
 
 MatPS <- rbind(dens[1:2,], apply(dens[1:2, ], 2, min))#Obtenemos el valor mínimo de cada especie
 MatPS <- data.frame(MatPS, Medidas=rowSums(MatPS), Tipo= c("A", "B", "W")) #Obtenemos W,A,B
 
 kable(MatPS, caption = "Medidas para obtener el porcentaje de Similitud")
+```
 
+```{r}
 PS <- (2*MatPS[3,5])/(MatPS[1,5]+MatPS[2,5])
 PS
 ```
@@ -250,7 +253,7 @@ En el ejemplo que mostramos en el inicio, las similitudes entre comunidades basa
 
 De esta forma, las diferencias entre sitios son dependientes de la abundancia de cada especie. En el caso de *G. spinosa* su eje varía entre 5 y 21, mientras que para *T. billbergii* varía entre 1 y 3 (Figura \@ref(fig:NMDS2)a). Veamos ahora que sucede con las similitud si incremento la abundancia de *T. billbergii* (Figura \@ref(fig:NMDS2)b).
 
-```{r NMDS2, fig.cap = "Distancias de cuatro localidades hipotéticas",  fig.height=3, fig.width=3}
+```{r NMDS2, fig.cap = "Distancias de cuatro localidades hipotéticas",  fig.height=3}
 par(mar=c(4,4,1,1), mgp=c(1,0.3,0), mfcol=c(1,2), tcl= -0.2)
 dens1 <- dens
 dens1$T.bil <- dens1$T.bil*100
