@@ -101,7 +101,7 @@ El *porcentaje de similitud* es la versión cuantitativa del índice de Sorensen
     
 Donde; _W_ es la sumatoria del valor mínimo de la abundancia entre las comunidades comparadas para cada especie. _A_  y _B_ es la suma de las abundancias de todas las especies en cada sitio. 
 
-```{r}
+```{r, echo=FALSE}
 library(knitr)
 
 MatPS <- rbind(dens[1:2,], apply(dens[1:2, ], 2, min))#Obtenemos el valor mínimo de cada especie
