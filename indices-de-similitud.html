@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Similitud de Comunidades biológicas</title>
+  <meta name="description" content="Similitud de Comunidades biológicas">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Similitud de Comunidades biológicas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Similitud de Comunidades biológicas" />
+  
+  
+  
+
+<meta name="author" content="Carlos Iván Espinosa">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="similitud-disimilitud-y-distancia.html">
+<link rel="next" href="distancias-entre-sitios.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #0000ff; } /* Keyword */
+code > span.ch { color: #008080; } /* Char */
+code > span.st { color: #008080; } /* String */
+code > span.co { color: #008000; } /* Comment */
+code > span.ot { color: #ff4000; } /* Other */
+code > span.al { color: #ff0000; } /* Alert */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #008000; font-weight: bold; } /* Warning */
+code > span.cn { } /* Constant */
+code > span.sc { color: #008080; } /* SpecialChar */
+code > span.vs { color: #008080; } /* VerbatimString */
+code > span.ss { color: #008080; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #0000ff; } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ff4000; } /* Preprocessor */
+code > span.do { color: #008000; } /* Documentation */
+code > span.an { color: #008000; } /* Annotation */
+code > span.cv { color: #008000; } /* CommentVar */
+code > span.at { } /* Attribute */
+code > span.in { color: #008000; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Similitud de comunidades biológicas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
+<li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="1" data-path="introduccion.html"><a href="introduccion.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduccion.html"><a href="introduccion.html#los-cambios-en-la-estructura-y-composicion-de-la-comunidad-hacen-que-ciertos-transectos-sean-mas-parecidos-entre-si-que-otros-en-el-caso-del-ejemplo-las-similitudes-en-cuanto-a-estructura-y-composicion-de-las-especies-son-mas-o-menos-claras-sin-embargo-en-la-realidad-es-mas-complejo-determinar-a-simple-vista-estas-similitudes.-a-continuacion-veremos-los-metodos-que-se-usan-para-cuantificar-estas-similitudes."><i class="fa fa-check"></i><b>1.1</b> Los cambios en la estructura y composición de la comunidad hacen que ciertos transectos sean más parecidos entre sí que otros, en el caso del ejemplo las similitudes en cuanto a estructura y composición de las especies son más o menos claras, sin embargo, en la realidad es más complejo determinar a simple vista estas similitudes. A continuación, veremos los métodos que se usan para cuantificar estas similitudes.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="similitud-disimilitud-y-distancia.html"><a href="similitud-disimilitud-y-distancia.html"><i class="fa fa-check"></i><b>2</b> Similitud, disimilitud y distancia</a></li>
+<li class="chapter" data-level="3" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html"><i class="fa fa-check"></i><b>3</b> Índices de Similitud</a><ul>
+<li class="chapter" data-level="3.1" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html#indices-cualitativos"><i class="fa fa-check"></i><b>3.1</b> Índices cualitativos</a></li>
+<li class="chapter" data-level="3.2" data-path="indices-de-similitud.html"><a href="indices-de-similitud.html#indices-cuantitativos"><i class="fa fa-check"></i><b>3.2</b> Índices cuantitativos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html"><i class="fa fa-check"></i><b>4</b> Distancias entre sitios</a><ul>
+<li class="chapter" data-level="4.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-euclidiana"><i class="fa fa-check"></i><b>4.1</b> Distancia Euclidiana</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-doble-ceros-y-abundancia"><i class="fa fa-check"></i><b>4.1.1</b> Efecto de doble-ceros y abundancia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-la-abundancia"><i class="fa fa-check"></i><b>4.1.2</b> Efecto de la abundancia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-bray-curtis"><i class="fa fa-check"></i><b>4.2</b> Distancia Bray-Curtis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformacion-y-estandarizacion-de-datos.html"><a href="transformacion-y-estandarizacion-de-datos.html"><i class="fa fa-check"></i><b>5</b> Transformación y Estandarización de datos</a><ul>
+<li class="chapter" data-level="5.1" data-path="transformacion-y-estandarizacion-de-datos.html"><a href="transformacion-y-estandarizacion-de-datos.html#transformacion-de-datos"><i class="fa fa-check"></i><b>5.1</b> Transformación de datos</a></li>
+<li class="chapter" data-level="5.2" data-path="transformacion-y-estandarizacion-de-datos.html"><a href="transformacion-y-estandarizacion-de-datos.html#estandarizacion-de-los-datos"><i class="fa fa-check"></i><b>5.2</b> Estandarización de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ejercicio-practico.html"><a href="ejercicio-practico.html"><i class="fa fa-check"></i><b>6</b> Ejercicio práctico</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Similitud de Comunidades biológicas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="indices-de-similitud" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Índices de Similitud</h1>
+<p>¿Cuán similares son dos localidades?, vamos a calcular dos tipos de similitudes una basada en incidencia (presencia-ausencia de especies) (ej. Índices de <em>Sorensen</em>, <em>Jaccard</em> y <em>Simpson</em>), y otra basada en la abundancia, <em>Porcentaje de Similitud</em>. Imaginemos que tenemos cuatro localidades (A, B, C, D) donde recogemos los datos de densidad de cuatro especies; <em>Tabebuia billbergii</em>, <em>Geoffroea spinosa</em>,<em>Ceiba trichistandra</em> y <em>Colicodendron scabridum</em>, especies características de bosques secos tropicales. Podemos introducir datos hipotéticos de abundancia para cada especie en cada una de las localidades.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dens &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">T.bil =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="dt">G.spi =</span> <span class="kw">c</span>(<span class="dv">21</span>, <span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">5</span>),
+                   <span class="dt">C.tri =</span> <span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">5</span>), <span class="dt">C.sca =</span> <span class="kw">c</span>(<span class="dv">16</span>, <span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">4</span>))
+<span class="kw">row.names</span>(dens) &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span>:<span class="dv">4</span>]
+dens</code></pre></div>
+<pre><code>##   T.bil G.spi C.tri C.sca
+## A     1    21    11    16
+## B     1     8     3     0
+## C     2    13     7     9
+## D     3     5     5     4</code></pre>
+<p>Generamos un gráfico basado en las dos primeras especies para ver cuánto se parece cada sitio (Figura <a href="indices-de-similitud.html#fig:NMDS">3.1</a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mgp=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="fl">0.3</span>,<span class="dv">0</span>), <span class="dt">tcl=</span> -<span class="fl">0.2</span>)
+<span class="kw">plot</span>(dens[,<span class="dv">1</span>:<span class="dv">2</span>], <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">cex.axis=</span><span class="fl">0.8</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">20</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">25</span>)) 
+<span class="kw">text</span>(dens[,<span class="dv">1</span>:<span class="dv">2</span>], <span class="kw">row.names</span>(dens), <span class="dt">col =</span><span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:NMDS"></span>
+<img src="Similitud_files/figure-html/NMDS-1.png" alt="Similitud de cuatro localidades hipotéticas" width="288" />
+<p class="caption">
+Figure 3.1: Similitud de cuatro localidades hipotéticas
+</p>
+</div>
+<p>En la figura <a href="indices-de-similitud.html#fig:NMDS">3.1</a> vemos que la composición de especies en el sitio A es diferente de la composición del sitio D. Es decir, la similitud entre el sitio A y D es menor que entre los otros sitios. Lo siguiente que nos deberíamos preguntar es; ¿qué tan similares son los dos sitios?</p>
+<div id="indices-cualitativos" class="section level2">
+<h2><span class="header-section-number">3.1</span> Índices cualitativos</h2>
+<p>Los índices cualitativos o de incidencia, son una medida que nos permite evaluar la similitud entre comunidades basados en presencia-ausencia de especies. A continuación veremos tres diferentes índices:</p>
+<blockquote>
+<p><small><span class="math display">\[S_s= \frac{(2c)}{(a+b+2c)}\]</span> Índice de Sorensen</small></p>
+<p><small><span class="math display">\[S_s= \frac{(c)}{(a+b+c)}\]</span> Índice de Jaccard</small></p>
+<p><small><span class="math display">\[S_s= \frac{(c)}{c+min(a+b)}\]</span> Índice de Simpson</small></p>
+</blockquote>
+<p>Donde <em>c</em> es el número de especies en común entre los dos sitios, <em>a</em> y <em>b</em> son el número de especies únicas en cada sitio. Las diferencias entre estos índices radica en la importancia que se le da a cada componente, en el caso del índice de Sorensen las especies compartidas tienen una gran importancia, por eso es multiplicada por dos. En el caso del índice de Simpson, es un índice usado cuando hay diferencias muy altas entre pares de comunidades, así restamos el peso obteniendo el valor mínimo de entre a y b.</p>
+<p>Para calcular estos índices entre los sitios A y B necesitamos definir el número de especies compartidas y luego el número de especies únicas de los dos sitios.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comp &lt;-<span class="st"> </span>dens
+comp[comp&gt;<span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co">#Generamos una matriz de presencia ausencia</span>
+comp</code></pre></div>
+<pre><code>##   T.bil G.spi C.tri C.sca
+## A     1     1     1     1
+## B     1     1     1     0
+## C     1     1     1     1
+## D     1     1     1     1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(comp[<span class="dv">1</span>:<span class="dv">2</span>,])==<span class="dv">1</span>&amp;comp[<span class="dv">2</span>,]==<span class="dv">0</span>)<span class="co">#Ocurren en A pero no en B</span>
+b &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(comp[<span class="dv">1</span>:<span class="dv">2</span>,])==<span class="dv">1</span>&amp;comp[<span class="dv">1</span>,]==<span class="dv">0</span>)<span class="co">#Ocurren en B pero no en A</span>
+c &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">colSums</span>(comp[<span class="dv">1</span>:<span class="dv">2</span>,])==<span class="dv">2</span>) <span class="co">#ocurren en A y B</span>
+
+a;b;c</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>Ahora obtenemos el valor de similitud entre los dos primeros sitios (A y B).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Sor &lt;-<span class="st"> </span>(<span class="dv">2</span>*c)/(a+b+(<span class="dv">2</span>*c))
+Jac &lt;-<span class="st"> </span>c/(a+b+c)
+Sim &lt;-<span class="st"> </span>c/c+<span class="kw">min</span>(a,b)
+
+Sor; Jac; Sim</code></pre></div>
+<pre><code>## [1] 0.8571429</code></pre>
+<pre><code>## [1] 0.75</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Según el índice de Sorensen estos dos sitios son parecidos en un 86%, mientras que para el índice de Jaccard es el 75% y para Simpson estos dos sitios son iguales (100%).</p>
+</div>
+<div id="indices-cuantitativos" class="section level2">
+<h2><span class="header-section-number">3.2</span> Índices cuantitativos</h2>
+<p>El <em>porcentaje de similitud</em> es la versión cuantitativa del índice de Sorensen. Este índice está basado en datos de abundancia y es calculado como:</p>
+<blockquote>
+<p><small><span class="math display">\[S_s= \frac{(2W)}{A+B}\]</span> Porcentaje de Similitud</small></p>
+</blockquote>
+<p>Donde; <em>W</em> es la sumatoria del valor mínimo de la abundancia entre las comunidades comparadas para cada especie. <em>A</em> y <em>B</em> es la suma de las abundancias de todas las especies en cada sitio.</p>
+<pre><code>## Warning: package &#39;knitr&#39; was built under R version 3.5.3</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 3.1: </span>Medidas para obtener el porcentaje de Similitud</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">T.bil</th>
+<th align="right">G.spi</th>
+<th align="right">C.tri</th>
+<th align="right">C.sca</th>
+<th align="right">Medidas</th>
+<th align="left">Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td align="right">1</td>
+<td align="right">21</td>
+<td align="right">11</td>
+<td align="right">16</td>
+<td align="right">49</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">12</td>
+<td align="left">B</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">12</td>
+<td align="left">W</td>
+</tr>
+</tbody>
+</table>
+<pre><code>## [1] 0.3934426</code></pre>
+<p>Esto significa que las comunidades A y B tienen un porcentaje de similitud del 39%. Los datos de los dos tipos de índices utilizados difieren entre sí, el porcentaje de similitud utiliza no solamente la presencia-ausencia sino también la abundancia lo que podría estar reduciendo la similitud entre sitios.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="similitud-disimilitud-y-distancia.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="distancias-entre-sitios.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Similitud.Rmd",
+"text": "Edit"
+},
+"download": ["Similitud.pdf", "Similitud.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
