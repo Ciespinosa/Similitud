@@ -1,7 +1,7 @@
 --- 
 title: "Similitud de Comunidades biológicas"
 author: "Carlos Iván Espinosa"
-date: "Octubre 2019"
+date: "Enero 2022"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
