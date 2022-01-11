@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Transformación y Estandarización de datos | Similitud de Comunidades biológicas</title>
+  <meta name="description" content="Capítulo 5 Transformación y Estandarización de datos | Similitud de Comunidades biológicas" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Transformación y Estandarización de datos | Similitud de Comunidades biológicas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Transformación y Estandarización de datos | Similitud de Comunidades biológicas" />
+  
+  
+  
+
+<meta name="author" content="Carlos Iván Espinosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="distancias-entre-sitios.html"/>
+<link rel="next" href="ejercicio-práctico.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Similitud de comunidades biológicas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
+<li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="similitud-disimilitud-y-distancia.html"><a href="similitud-disimilitud-y-distancia.html"><i class="fa fa-check"></i><b>2</b> Similitud, disimilitud y distancia</a></li>
+<li class="chapter" data-level="3" data-path="índices-de-similitud.html"><a href="índices-de-similitud.html"><i class="fa fa-check"></i><b>3</b> Índices de Similitud</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="índices-de-similitud.html"><a href="índices-de-similitud.html#índices-cualitativos"><i class="fa fa-check"></i><b>3.1</b> Índices cualitativos</a></li>
+<li class="chapter" data-level="3.2" data-path="índices-de-similitud.html"><a href="índices-de-similitud.html#índices-cuantitativos"><i class="fa fa-check"></i><b>3.2</b> Índices cuantitativos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html"><i class="fa fa-check"></i><b>4</b> Distancias entre sitios</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-euclidiana"><i class="fa fa-check"></i><b>4.1</b> Distancia Euclidiana</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-doble-ceros-y-abundancia"><i class="fa fa-check"></i><b>4.1.1</b> Efecto de doble-ceros y abundancia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-la-abundancia"><i class="fa fa-check"></i><b>4.1.2</b> Efecto de la abundancia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-bray-curtis"><i class="fa fa-check"></i><b>4.2</b> Distancia Bray-Curtis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformación-y-estandarización-de-datos.html"><a href="transformación-y-estandarización-de-datos.html"><i class="fa fa-check"></i><b>5</b> Transformación y Estandarización de datos</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="transformación-y-estandarización-de-datos.html"><a href="transformación-y-estandarización-de-datos.html#transformación-de-datos"><i class="fa fa-check"></i><b>5.1</b> Transformación de datos</a></li>
+<li class="chapter" data-level="5.2" data-path="transformación-y-estandarización-de-datos.html"><a href="transformación-y-estandarización-de-datos.html#estandarización-de-los-datos"><i class="fa fa-check"></i><b>5.2</b> Estandarización de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ejercicio-práctico.html"><a href="ejercicio-práctico.html"><i class="fa fa-check"></i><b>6</b> Ejercicio práctico</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Similitud de Comunidades biológicas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="transformación-y-estandarización-de-datos" class="section level1" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Transformación y Estandarización de datos</h1>
+<p>Cuando trabajamos con datos multivariantes cabe la posibilidad de que los datos dentro de esta matriz tengan diferencias de magnitud importantes. Como vimos antes, el cálculo de distancia entre los sitios puede verse fuertemente afectado por la magnitud de sus diferencias.</p>
+<p>En el ejemplo que mostramos en el inicio, las similitudes entre comunidades basadas en las dos primeras especies, las diferencias dependen de la escala de medición (los valores de los ejes), y sobre cómo medimos la distancia a través del espacio multivariado <span class="citation">(<a href="#ref-Stevens2009" role="doc-biblioref">Stevens 2009</a>)</span>.</p>
+<p>De esta forma, las diferencias entre sitios son dependientes de la abundancia de cada especie. En el caso de <em>G. spinosa</em> su eje varía entre 5 y 21, mientras que para <em>T. billbergii</em> varía entre 1 y 3 (Figura <a href="transformación-y-estandarización-de-datos.html#fig:NMDS2">5.1</a>a). Veamos ahora que sucede con las similitud si incremento la abundancia de <em>T. billbergii</em> (Figura <a href="transformación-y-estandarización-de-datos.html#fig:NMDS2">5.1</a>b).</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="transformación-y-estandarización-de-datos.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">mgp=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">0.3</span>,<span class="dv">0</span>), <span class="at">mfcol=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">tcl=</span> <span class="sc">-</span><span class="fl">0.2</span>)</span>
+<span id="cb33-2"><a href="transformación-y-estandarización-de-datos.html#cb33-2" aria-hidden="true" tabindex="-1"></a>dens1 <span class="ot">&lt;-</span> dens</span>
+<span id="cb33-3"><a href="transformación-y-estandarización-de-datos.html#cb33-3" aria-hidden="true" tabindex="-1"></a>dens1<span class="sc">$</span>T.bil <span class="ot">&lt;-</span> dens1<span class="sc">$</span>T.bil<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb33-4"><a href="transformación-y-estandarización-de-datos.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dens[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">type =</span> <span class="st">&quot;n&quot;</span>, <span class="at">cex.axis=</span><span class="fl">0.8</span>, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>), <span class="at">main=</span><span class="st">&quot;a.&quot;</span>) </span>
+<span id="cb33-5"><a href="transformación-y-estandarización-de-datos.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(dens[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="fu">row.names</span>(dens), <span class="at">col =</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb33-6"><a href="transformación-y-estandarización-de-datos.html#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="transformación-y-estandarización-de-datos.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dens1[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">type =</span> <span class="st">&quot;n&quot;</span>, <span class="at">cex.axis=</span><span class="fl">0.8</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">300</span>), <span class="at">main=</span><span class="st">&quot;b.&quot;</span>) </span>
+<span id="cb33-8"><a href="transformación-y-estandarización-de-datos.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(dens1[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="fu">row.names</span>(dens1), <span class="at">col =</span><span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:NMDS2"></span>
+<img src="Similitud_files/figure-html/NMDS2-1.png" alt="Distancias de cuatro localidades hipotéticas" width="672" />
+<p class="caption">
+Figure 5.1: Distancias de cuatro localidades hipotéticas
+</p>
+</div>
+<p>Como vemos en la figura <a href="transformación-y-estandarización-de-datos.html#fig:NMDS2">5.1</a> las distancias entre cada uno de los sitios cambio cuando incremento la abundancia de <em>T. bilbergi</em>, aunque este incremento fue proporcional. Una forma de corregir esta distorsión es calcular la densidad relativa de cada especie, de esta forma cada especie variará entre 0 y 1 <span class="citation">(<a href="#ref-Stevens2009" role="doc-biblioref">Stevens 2009</a>)</span>. Cuando nos referimos a densidad relativa hablamos de la densidad de una especie con referencia a algo, en este caso con relación a la abundancia de individuos de la misma especie en otros sitios.</p>
+<p>Para calcular la densidad relativa dividimos la abundancia de cada especie para la suma total de los individuos de las especies en esa muestra.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="transformación-y-estandarización-de-datos.html#cb34-1" aria-hidden="true" tabindex="-1"></a>dens[,<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sum</span>(dens[,<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] 0.1428571 0.1428571 0.2857143 0.4285714</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="transformación-y-estandarización-de-datos.html#cb36-1" aria-hidden="true" tabindex="-1"></a>dens1[,<span class="dv">1</span>]<span class="sc">/</span><span class="fu">sum</span>(dens1[,<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] 0.1428571 0.1428571 0.2857143 0.4285714</code></pre>
+<p>Ahora podemos ver cómo <em>T. billbergii</em> varía en su abundancia en los cuatro sitios. Los sitios A y B tienen el 14% de individuos mientras que el D tiene el 42% de los individuos de esta especie. Interesantemente, no hay diferencias en las proporciones entre las dos medidas que tenemos. ¿Qué pasó con las distancias?</p>
+<div class="figure"><span style="display:block;" id="fig:NMDS3"></span>
+<img src="Similitud_files/figure-html/NMDS3-1.png" alt="Distancias de cuatro localidades hipotéticas" width="480" />
+<p class="caption">
+Figure 5.2: Distancias de cuatro localidades hipotéticas
+</p>
+</div>
+<p>En la figura <a href="transformación-y-estandarización-de-datos.html#fig:NMDS3">5.2</a> podemos apreciar que no hay diferencias entre las dos comunidades cuando estoy usando la densidad relativa. Pero ¿Qué implicaciones biológicas tiene el usar las densidades relativas para calcular la distancia entre sitios?</p>
+<p>Cuando usamos las densidades relativas estamos dando el mismo peso a todas las especies. En un ecosistema con una especie dominante y varias subordinadas, al usar la densidad relativa estoy eliminando esa dominancia. Es importante tener claro este punto, ya que las interpretaciones que puedo hacer con los datos de abundancia y abundancia relativa son distintos.</p>
+<div id="transformación-de-datos" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Transformación de datos</h2>
+<p>Esta claro que la magnitud de las diferencias entre las variables tiene un impacto sobre el cálculo de la distancia. Ahora, nos interesa poder manejar el efecto de esas diferencias, para lo cual desarrollamos una transformación.</p>
+<p>La transformación de datos implica una modificación de los datos brutos a través de una ecuación algebraica. La transformación de datos implica una modificación independientemente para cada dato, no existe influencia del resto de datos.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-16">Table 5.1: </span>Comunidad de macroinvertebrados acuáticos</caption>
+<thead>
+<tr class="header">
+<th align="left">LOCALIDAD</th>
+<th align="right">Allu</th>
+<th align="right">Atop</th>
+<th align="right">Atri</th>
+<th align="right">Baet</th>
+<th align="right">Bezz</th>
+<th align="right">Blep</th>
+<th align="right">Cera</th>
+<th align="right">Chel</th>
+<th align="right">Chim</th>
+<th align="right">Chir</th>
+<th align="right">Cole</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bo-1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">18</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Bo-2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Bo-3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">BP-1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">81</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">27</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">BP-2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">BP-3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">54</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Pa-1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">984</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">81</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Pa-2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Pa-3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">93</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">18</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Ur-1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">855</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Ur-2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">12</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">9</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Ur-3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">27</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>En la tabla anterior podemos ver que la comunidad está compuesta por un par de especies dominantes y varias especies raras.</p>
+<p>Al transformar los datos evitamos que las especies dominantes definan el cálculo de la distancia.</p>
+<p>Existen varias posibilidades para transformar los datos, por lo que definir que función utilizar es importante. Cada tipo de transformación produce resultados distintos por lo que debemos utilizarlas con precaución.</p>
+<p>La transformación más sencilla o menos intensa es la raíz cuadrada, mientras que el logaritmo es la transformación más intensa, podríamos utilizar la raíz cuarta como una función intermedia. La raíz cuadrada la utilizaríamos cuando tenemos diferencias con variaciones de una magnitud de diferencia (entre decenas y centenas), mientras que la transformación logarítmica la haríamos con comunidades donde hay más de una magnitud de diferencia (entre decenas y miles).</p>
+<p>Aunque hay muchos autores que aconsejan realizar transformaciones hay que ser conscientes de lo que estamos haciendo, transformaciones muy fuertes en una matriz con pocas diferencias pueden hacer que, por ejemplo, las especies raras tengan igual peso que las dominantes, ¿esto es lo que queremos?</p>
+<p><strong>Recuerde: las diferentes transformaciones tienen interpretaciones biológicas distintas. Debemos ser conscientes de lo que estamos haciendo y de su posterior interpretación biológica.</strong></p>
+<p>Veamos un ejemplo:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="transformación-y-estandarización-de-datos.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4</span>)</span>
+<span id="cb38-2"><a href="transformación-y-estandarización-de-datos.html#cb38-2" aria-hidden="true" tabindex="-1"></a>aves<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sp1=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">90</span>, <span class="dv">10</span>), <span class="at">sp2=</span> <span class="fu">sample</span>(<span class="dv">100</span><span class="sc">:</span><span class="dv">250</span>, <span class="dv">10</span>))</span>
+<span id="cb38-3"><a href="transformación-y-estandarización-de-datos.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="transformación-y-estandarización-de-datos.html#cb38-4" aria-hidden="true" tabindex="-1"></a>insectos<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sp1=</span> <span class="fu">sample</span>(<span class="dv">5</span><span class="sc">:</span><span class="dv">99</span>, <span class="dv">10</span>), <span class="at">sp2=</span> <span class="fu">sample</span>(<span class="dv">1000</span><span class="sc">:</span><span class="dv">2500</span>, <span class="dv">10</span>))</span>
+<span id="cb38-5"><a href="transformación-y-estandarización-de-datos.html#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="transformación-y-estandarización-de-datos.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="do">##¿Qué pasa cuando transformamos?</span></span>
+<span id="cb38-7"><a href="transformación-y-estandarización-de-datos.html#cb38-7" aria-hidden="true" tabindex="-1"></a>aveT <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cbind</span>(aves, <span class="fu">sqrt</span>(aves),<span class="fu">log</span>(aves)),<span class="dv">2</span>)</span>
+<span id="cb38-8"><a href="transformación-y-estandarización-de-datos.html#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(aveT) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;sp1&quot;</span>, <span class="st">&quot;sp2&quot;</span>), <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;&quot;</span>,<span class="st">&quot;sqrt&quot;</span>, <span class="st">&quot;sqrt&quot;</span>, <span class="st">&quot;log&quot;</span>, <span class="st">&quot;log&quot;</span>), <span class="at">sep=</span><span class="st">&quot;.&quot;</span>)</span>
+<span id="cb38-9"><a href="transformación-y-estandarización-de-datos.html#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="transformación-y-estandarización-de-datos.html#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(aveT, <span class="at">caption =</span> <span class="st">&quot;Efecto de la transformación. Pequeñas diferencias&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-17">Table 5.2: </span>Efecto de la transformación. Pequeñas diferencias</caption>
+<thead>
+<tr class="header">
+<th align="right">sp1.</th>
+<th align="right">sp2.</th>
+<th align="right">sp1.sqrt</th>
+<th align="right">sp2.sqrt</th>
+<th align="right">sp1.log</th>
+<th align="right">sp2.log</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">75</td>
+<td align="right">201</td>
+<td align="right">8.66</td>
+<td align="right">14.18</td>
+<td align="right">4.32</td>
+<td align="right">5.30</td>
+</tr>
+<tr class="even">
+<td align="right">51</td>
+<td align="right">229</td>
+<td align="right">7.14</td>
+<td align="right">15.13</td>
+<td align="right">3.93</td>
+<td align="right">5.43</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">228</td>
+<td align="right">1.73</td>
+<td align="right">15.10</td>
+<td align="right">1.10</td>
+<td align="right">5.43</td>
+</tr>
+<tr class="even">
+<td align="right">71</td>
+<td align="right">183</td>
+<td align="right">8.43</td>
+<td align="right">13.53</td>
+<td align="right">4.26</td>
+<td align="right">5.21</td>
+</tr>
+<tr class="odd">
+<td align="right">44</td>
+<td align="right">134</td>
+<td align="right">6.63</td>
+<td align="right">11.58</td>
+<td align="right">3.78</td>
+<td align="right">4.90</td>
+</tr>
+<tr class="even">
+<td align="right">58</td>
+<td align="right">208</td>
+<td align="right">7.62</td>
+<td align="right">14.42</td>
+<td align="right">4.06</td>
+<td align="right">5.34</td>
+</tr>
+<tr class="odd">
+<td align="right">89</td>
+<td align="right">147</td>
+<td align="right">9.43</td>
+<td align="right">12.12</td>
+<td align="right">4.49</td>
+<td align="right">4.99</td>
+</tr>
+<tr class="even">
+<td align="right">56</td>
+<td align="right">200</td>
+<td align="right">7.48</td>
+<td align="right">14.14</td>
+<td align="right">4.03</td>
+<td align="right">5.30</td>
+</tr>
+<tr class="odd">
+<td align="right">30</td>
+<td align="right">224</td>
+<td align="right">5.48</td>
+<td align="right">14.97</td>
+<td align="right">3.40</td>
+<td align="right">5.41</td>
+</tr>
+<tr class="even">
+<td align="right">62</td>
+<td align="right">249</td>
+<td align="right">7.87</td>
+<td align="right">15.78</td>
+<td align="right">4.13</td>
+<td align="right">5.52</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="transformación-y-estandarización-de-datos.html#cb39-1" aria-hidden="true" tabindex="-1"></a>insT <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cbind</span>(insectos, <span class="fu">sqrt</span>(insectos),<span class="fu">log</span>(insectos)),<span class="dv">2</span>) </span>
+<span id="cb39-2"><a href="transformación-y-estandarización-de-datos.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(insT) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;sp1&quot;</span>, <span class="st">&quot;sp2&quot;</span>), <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;&quot;</span>,<span class="st">&quot;sqrt&quot;</span>, <span class="st">&quot;sqrt&quot;</span>, <span class="st">&quot;log&quot;</span>, <span class="st">&quot;log&quot;</span>), <span class="at">sep=</span><span class="st">&quot;.&quot;</span>)</span>
+<span id="cb39-3"><a href="transformación-y-estandarización-de-datos.html#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="transformación-y-estandarización-de-datos.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(insT, <span class="at">caption =</span> <span class="st">&quot;Efecto de la transformación, Grandes diferencias&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-17">Table 5.2: </span>Efecto de la transformación, Grandes diferencias</caption>
+<thead>
+<tr class="header">
+<th align="right">sp1.</th>
+<th align="right">sp2.</th>
+<th align="right">sp1.sqrt</th>
+<th align="right">sp2.sqrt</th>
+<th align="right">sp1.log</th>
+<th align="right">sp2.log</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">36</td>
+<td align="right">1202</td>
+<td align="right">6.00</td>
+<td align="right">34.67</td>
+<td align="right">3.58</td>
+<td align="right">7.09</td>
+</tr>
+<tr class="even">
+<td align="right">51</td>
+<td align="right">2428</td>
+<td align="right">7.14</td>
+<td align="right">49.27</td>
+<td align="right">3.93</td>
+<td align="right">7.79</td>
+</tr>
+<tr class="odd">
+<td align="right">48</td>
+<td align="right">2088</td>
+<td align="right">6.93</td>
+<td align="right">45.69</td>
+<td align="right">3.87</td>
+<td align="right">7.64</td>
+</tr>
+<tr class="even">
+<td align="right">73</td>
+<td align="right">1303</td>
+<td align="right">8.54</td>
+<td align="right">36.10</td>
+<td align="right">4.29</td>
+<td align="right">7.17</td>
+</tr>
+<tr class="odd">
+<td align="right">19</td>
+<td align="right">1151</td>
+<td align="right">4.36</td>
+<td align="right">33.93</td>
+<td align="right">2.94</td>
+<td align="right">7.05</td>
+</tr>
+<tr class="even">
+<td align="right">26</td>
+<td align="right">1891</td>
+<td align="right">5.10</td>
+<td align="right">43.49</td>
+<td align="right">3.26</td>
+<td align="right">7.54</td>
+</tr>
+<tr class="odd">
+<td align="right">96</td>
+<td align="right">2338</td>
+<td align="right">9.80</td>
+<td align="right">48.35</td>
+<td align="right">4.56</td>
+<td align="right">7.76</td>
+</tr>
+<tr class="even">
+<td align="right">68</td>
+<td align="right">1396</td>
+<td align="right">8.25</td>
+<td align="right">37.36</td>
+<td align="right">4.22</td>
+<td align="right">7.24</td>
+</tr>
+<tr class="odd">
+<td align="right">53</td>
+<td align="right">1979</td>
+<td align="right">7.28</td>
+<td align="right">44.49</td>
+<td align="right">3.97</td>
+<td align="right">7.59</td>
+</tr>
+<tr class="even">
+<td align="right">58</td>
+<td align="right">2339</td>
+<td align="right">7.62</td>
+<td align="right">48.36</td>
+<td align="right">4.06</td>
+<td align="right">7.76</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="estandarización-de-los-datos" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Estandarización de los datos</h2>
+<p>La estandarización de los datos permite modificar las variables transformándolas en unidades de desviación típica, lo que nos permite comparar entre valores de distribuciones normales diferentes, o de valores diferentes.</p>
+<p>La estandarización o tipificación se lo realiza restando a cada valor el valor medio de la variable y dividiendo para la desviación estándar.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="transformación-y-estandarización-de-datos.html#cb40-1" aria-hidden="true" tabindex="-1"></a>avesE <span class="ot">&lt;-</span> (aves[,<span class="dv">1</span>]<span class="sc">-</span><span class="fu">mean</span>(aves[,<span class="dv">1</span>]))<span class="sc">/</span><span class="fu">sd</span>(aves[,<span class="dv">1</span>])</span>
+<span id="cb40-2"><a href="transformación-y-estandarización-de-datos.html#cb40-2" aria-hidden="true" tabindex="-1"></a>avesE</span></code></pre></div>
+<pre><code>##  [1]  0.86745705 -0.11922395 -2.09258597  0.70301022 -0.40700592  0.16855801
+##  [7]  1.44302097  0.08633459 -0.98256984  0.33300484</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="transformación-y-estandarización-de-datos.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(avesE),<span class="dv">1</span>);<span class="fu">sd</span>(avesE) </span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Como vemos las variables estandarizadas tienen como propiedad que la desviación estándar es 1 y la media es 0.</p>
+<hr />
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Stevens2009" class="csl-entry">
+Stevens, M. Henry H. 2009. <em><span class="nocase">A Primer of Ecology with R</span></em>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="distancias-entre-sitios.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ejercicio-práctico.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Similitud.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Similitud.pdf", "Similitud.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

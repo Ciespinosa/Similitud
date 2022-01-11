@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 4 Distancias entre sitios | Similitud de Comunidades biológicas</title>
+  <meta name="description" content="Capítulo 4 Distancias entre sitios | Similitud de Comunidades biológicas" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 4 Distancias entre sitios | Similitud de Comunidades biológicas" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 4 Distancias entre sitios | Similitud de Comunidades biológicas" />
+  
+  
+  
+
+<meta name="author" content="Carlos Iván Espinosa" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="índices-de-similitud.html"/>
+<link rel="next" href="transformación-y-estandarización-de-datos.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Similitud de comunidades biológicas</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a></li>
+<li class="chapter" data-level="" data-path="objetivos.html"><a href="objetivos.html"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="similitud-disimilitud-y-distancia.html"><a href="similitud-disimilitud-y-distancia.html"><i class="fa fa-check"></i><b>2</b> Similitud, disimilitud y distancia</a></li>
+<li class="chapter" data-level="3" data-path="índices-de-similitud.html"><a href="índices-de-similitud.html"><i class="fa fa-check"></i><b>3</b> Índices de Similitud</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="índices-de-similitud.html"><a href="índices-de-similitud.html#índices-cualitativos"><i class="fa fa-check"></i><b>3.1</b> Índices cualitativos</a></li>
+<li class="chapter" data-level="3.2" data-path="índices-de-similitud.html"><a href="índices-de-similitud.html#índices-cuantitativos"><i class="fa fa-check"></i><b>3.2</b> Índices cuantitativos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html"><i class="fa fa-check"></i><b>4</b> Distancias entre sitios</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-euclidiana"><i class="fa fa-check"></i><b>4.1</b> Distancia Euclidiana</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-doble-ceros-y-abundancia"><i class="fa fa-check"></i><b>4.1.1</b> Efecto de doble-ceros y abundancia</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#efecto-de-la-abundancia"><i class="fa fa-check"></i><b>4.1.2</b> Efecto de la abundancia</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="distancias-entre-sitios.html"><a href="distancias-entre-sitios.html#distancia-bray-curtis"><i class="fa fa-check"></i><b>4.2</b> Distancia Bray-Curtis</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="transformación-y-estandarización-de-datos.html"><a href="transformación-y-estandarización-de-datos.html"><i class="fa fa-check"></i><b>5</b> Transformación y Estandarización de datos</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="transformación-y-estandarización-de-datos.html"><a href="transformación-y-estandarización-de-datos.html#transformación-de-datos"><i class="fa fa-check"></i><b>5.1</b> Transformación de datos</a></li>
+<li class="chapter" data-level="5.2" data-path="transformación-y-estandarización-de-datos.html"><a href="transformación-y-estandarización-de-datos.html#estandarización-de-los-datos"><i class="fa fa-check"></i><b>5.2</b> Estandarización de los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ejercicio-práctico.html"><a href="ejercicio-práctico.html"><i class="fa fa-check"></i><b>6</b> Ejercicio práctico</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Similitud de Comunidades biológicas</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="distancias-entre-sitios" class="section level1" number="4">
+<h1><span class="header-section-number">Capítulo 4</span> Distancias entre sitios</h1>
+<p>Como hemos visto hasta ahora, cuando tenemos dos comunidades muy parecidas entre sí tendremos valores altos de similitud. En contraposición los índices de distancia nos mostrarán valores altos cuando dos comunidades se parezcan poco. Como habíamos mencionado anteriormente existen dos tipos de medidas de distancia;</p>
+<ul>
+<li><p>aquellas calculadas a partir de los índices de similitud usualmente como D= 1-Similitud. Así, para los índices de incidencia (presencia - ausencia) se pueden usar los índices de Jacard, Simpson o Sorensen, mientras que para los índices cuantitativos se puede usar el porcentaje de similitud, este último conocido como distancia de Bray Curtis.</p></li>
+<li><p>aquellas que no tienen medidas de similitud análogas, algunos de estos índices son; Euclidiana, Chord, Hellinger.</p></li>
+</ul>
+<p>La <em>distancia</em> entre dos muestras está dada por la diferencia entre la abundancia y la composición de especies. En la figura <a href="índices-de-similitud.html#fig:NMDS">3.1</a> se observa que la comunidad A esta más alejada de la comunidad D que de las otras dos.</p>
+<div id="distancia-euclidiana" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Distancia Euclidiana</h2>
+<p>Existen muchas formas de poder calcular las distancias entre estas comunidades una de las más sencillas es la distancia <em>Euclidiana</em>. La distancia euclidiana entre dos sitios es simplemente la longitud del vector que conecta los sitios y la podemos obtener como <span class="math inline">\(\sqrt{x^2+y^2}\)</span>, donde <em>“x”</em> y <em>“y”</em> son las coordenadas (x, y) de distancia entre un par de sitios.</p>
+<p>En nuestro caso si queremos comparar B y C tenemos que la distancia en el eje <em>x</em> es la diferencia de la abundancia de <em>T. bilbergii</em> entre el sitio B y C.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="distancias-entre-sitios.html#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> dens[<span class="dv">2</span>, <span class="dv">1</span>] <span class="sc">-</span> dens[<span class="dv">3</span>, <span class="dv">1</span>]</span></code></pre></div>
+<p>Mientras que la distancia en el eje <em>y</em> es la diferencia en la abundancia de <em>G. spinosa</em> entre el sitio B y C.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="distancias-entre-sitios.html#cb17-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> dens[<span class="dv">2</span>, <span class="dv">2</span>] <span class="sc">-</span> dens[<span class="dv">3</span>, <span class="dv">2</span>]</span></code></pre></div>
+<p>Ahora obtenemos las distancias entre los dos sitios</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="distancias-entre-sitios.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 5.09902</code></pre>
+<p>Pero como en <em>R</em> todo es sencillo podemos utilizar la función <em>dist</em></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="distancias-entre-sitios.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(dens[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code></pre></div>
+<pre><code>##           A         B         C
+## B 13.000000                    
+## C  8.062258  5.099020          
+## D 16.124515  3.605551  8.062258</code></pre>
+<p>Si bien este cálculo es sencillo con dos especies, si tenemos que calcular la distancia para una comunidad con más de tres especies los cálculos son tediosos y largos. Para calcular la distancia <em>Euclidiana</em> entre pares de sitios con <em>R</em> especies utilizamos la siguiente ecuación:</p>
+<blockquote>
+<p><small><span class="math display">\[D_E = \sqrt{\sum_{i=l}^R (x_{ai} - x_{bi})^2}\]</span>
+Distancia Euclidiana</small></p>
+</blockquote>
+<div id="efecto-de-doble-ceros-y-abundancia" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Efecto de doble-ceros y abundancia</h3>
+<p>Aunque la distancia Euclidiana es fácilmente interpretable, se usa poco en análisis biológicos. Normalmente los datos de comunidad están caracterizados por una gran cantidad de ceros (especies no encontradas en determinados sitios), el cálculo de la distancia Euclidiana incrementa la similitud entre comunidades que presentan ceros para la misma especie.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-10">Table 4.1: </span>Efecto del doble cero</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">spp1</th>
+<th align="right">spp2</th>
+<th align="right">spp3</th>
+<th align="right">sp4</th>
+<th align="right">spp5</th>
+<th align="right">spp6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">B</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">C</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>Según los datos mostrados en la tabla tendríamos que hay un gradiente, la comunidad A comparte una especie con la comunidad B y la comunidad B comparte una especie con la comunidad C. Los índices deberían permitir recuperar ese gradiente, veamos lo que pasa.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="distancias-entre-sitios.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div>
+<pre><code>## Loading required package: permute</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## This is vegan 2.5-7</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="distancias-entre-sitios.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vegdist</span>(dcMat, <span class="st">&quot;euclidean&quot;</span>)</span></code></pre></div>
+<pre><code>##   A B
+## B 2  
+## C 2 2</code></pre>
+<p>Como vemos en el ejemplo, el doble cero de la comunidad A y C generan una mayor similitud, de esta forma, las tres comunidades son mostradas a igual distancia.</p>
+<p>Esto no debería ser un problema si el cero nos diese información consistente. En el caso de datos biológicos, el tener un valor de cero puede deberse a varias razones, por ejemplo puede ser que aunque la especie ocurre en ese lugar no pudo ser muestreada, o realmente no ocurre en ese lugar por restricciones abióticas, de esta forma el cero no es informativo y no podemos usarlo para generar matrices de distancias. En otros casos, normalmente en datos abióticos, el cero implica la ausencia de algo, por ejemplo tener cero mg de un contaminante es una información. De esta forma la distancia Euclidiana es usada sobre todo para interpretar datos ambientales.</p>
+</div>
+<div id="efecto-de-la-abundancia" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Efecto de la abundancia</h3>
+<p>Otra característica importante de la distancia euclidiana es que está fuertemente impactada por la diferencia de abundancias entre especies. El cálculo de esta distancia eleva al cuadrado las abundancias, por lo que el impacto de las especies dominantes es desproporcionado. En otras palabras la distancia euclideana incrementa el efecto de las especies dominantes. Veamos a qué nos referimos en el siguiente ejemplo.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="distancias-entre-sitios.html#cb28-1" aria-hidden="true" tabindex="-1"></a>dcMat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">spp1=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>),<span class="at">spp2=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">8</span>),</span>
+<span id="cb28-2"><a href="distancias-entre-sitios.html#cb28-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">spp3=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">7</span>))</span>
+<span id="cb28-3"><a href="distancias-entre-sitios.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="distancias-entre-sitios.html#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(dcMat2) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb28-5"><a href="distancias-entre-sitios.html#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="distancias-entre-sitios.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dcMat2, <span class="at">caption =</span> <span class="st">&quot;Efecto de la abundancia&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-12">Table 4.2: </span>Efecto de la abundancia</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">spp1</th>
+<th align="right">spp2</th>
+<th align="right">spp3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">B</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">C</td>
+<td align="right">0</td>
+<td align="right">8</td>
+<td align="right">7</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="distancias-entre-sitios.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vegdist</span>(dcMat2, <span class="st">&quot;euclidean&quot;</span>)</span></code></pre></div>
+<pre><code>##           A         B
+## B  1.732051          
+## C  9.219544 10.677078</code></pre>
+<p>Como vemos la distancia de la comunidad A a la C es de 9.21, aunque comparten dos especies, la diferencia en abundancias entre estas dos comunidades es muy marcada generando un incremento en la distancia. Por otro lado, la comunidad A tiene una distancia de 1.73 a la comunidad B, esta menor distancia se da aunque no comparten ninguna especie. Como vemos el efecto en la diferencia de abundancias tiene un fuerte impacto sobre el cálculo de distancias.</p>
+</div>
+</div>
+<div id="distancia-bray-curtis" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Distancia Bray-Curtis</h2>
+<p>Existen otras formas de medir distancias entre dos localidades. En ecología una de las distancias más utilizada es la de <em>Bray-Curtis</em>, esta distancia es el opuesto del porcentaje de similitud. Esta distancia es calculada como:</p>
+<blockquote>
+<p><small><span class="math display">\[D_{BC} = \sum_{i=l}^R \frac{(x_{ai} - x_{bi})}{(x_{ai} + x_{bi})}\]</span>
+Distancia de Bray-Curtis</small></p>
+</blockquote>
+<p>La distancia <em>Bray-Curtis</em> se refiere a la diferencia total en la abundancia de especies entre dos sitios, dividido para la abundancia total en cada sitio. La distancia Bray-Curtis tiende a resultar más intuitiva debido a que las especies comunes y raras tienen pesos relativamente similares, mientras que la distancia euclidiana depende en mayor medida de las especies más abundantes. Esto sucede porque las distancias euclidianas se basan en diferencias al cuadrado, mientras que Bray-Curtis utiliza diferencias absolutas. El elevar un número al cuadrado siempre amplifica la importancia de los valores más grandes. En la figura <a href="distancias-entre-sitios.html#fig:bray">4.1</a> se compara gráficos basados en distancias euclidianas y Bray-Curtis de los mismos datos.</p>
+<p>Como se había comentado, es virtualmente imposible representar una distancia en más de tres dimensiones (cada especie es una dimensión). Una forma sencilla de mostrar distancias para tres o más especies es crear un gráfico de dos dimensiones, intentando organizar todos los sitios para que las distancias sean aproximadamente las correctas. Está claro que esto es una aproximación, las distancias nunca serán exactas. Una técnica que intenta crear un arreglo aproximado es escalamiento multidimensional no métrico (NMDS).</p>
+<p>La función de escalamiento multidimensional no-métrico está en el paquete <code>vegan</code>. Aquí mostramos las distancias euclidianas entre sitios (Figura <a href="distancias-entre-sitios.html#fig:bray">4.1</a>a) y las distancias de Bray-Curtis (Figura <a href="distancias-entre-sitios.html#fig:bray">4.1</a>b).</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="distancias-entre-sitios.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan) </span>
+<span id="cb31-2"><a href="distancias-entre-sitios.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="distancias-entre-sitios.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Distancia Euclidiana</span></span>
+<span id="cb31-4"><a href="distancias-entre-sitios.html#cb31-4" aria-hidden="true" tabindex="-1"></a>mdsE <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dcMat, <span class="at">distance =</span> <span class="st">&quot;euc&quot;</span>, <span class="at">autotransform =</span> <span class="cn">FALSE</span>, <span class="at">trace =</span> <span class="dv">0</span>) </span>
+<span id="cb31-5"><a href="distancias-entre-sitios.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Distancia de Bray-Curtis</span></span>
+<span id="cb31-6"><a href="distancias-entre-sitios.html#cb31-6" aria-hidden="true" tabindex="-1"></a>mdsB <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dcMat, <span class="at">distance =</span> <span class="st">&quot;bray&quot;</span>, <span class="at">autotransform =</span> <span class="cn">FALSE</span>, <span class="at">trace =</span> <span class="dv">0</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="distancias-entre-sitios.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">oma=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb32-2"><a href="distancias-entre-sitios.html#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mgp=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="fl">0.3</span>,<span class="dv">0</span>), <span class="at">tcl=</span> <span class="sc">-</span><span class="fl">0.2</span>)</span>
+<span id="cb32-3"><a href="distancias-entre-sitios.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="distancias-entre-sitios.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mdsE, <span class="at">display =</span> <span class="st">&quot;sites&quot;</span>, </span>
+<span id="cb32-5"><a href="distancias-entre-sitios.html#cb32-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">&quot;text&quot;</span>,<span class="at">main=</span><span class="st">&quot;a)Euclidiana&quot;</span>, </span>
+<span id="cb32-6"><a href="distancias-entre-sitios.html#cb32-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.axis=</span> <span class="fl">0.7</span>, <span class="at">cex.main=</span><span class="fl">0.75</span>, <span class="at">cex.lab=</span><span class="fl">0.7</span>)</span>
+<span id="cb32-7"><a href="distancias-entre-sitios.html#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="distancias-entre-sitios.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mdsB, <span class="at">display =</span> <span class="st">&quot;sites&quot;</span>, <span class="at">type =</span> <span class="st">&quot;text&quot;</span>, </span>
+<span id="cb32-9"><a href="distancias-entre-sitios.html#cb32-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;b)Bray-Curtis&quot;</span>, </span>
+<span id="cb32-10"><a href="distancias-entre-sitios.html#cb32-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex.axis=</span> <span class="fl">0.7</span>, <span class="at">cex.main=</span><span class="fl">0.75</span>, <span class="at">cex.lab=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:bray"></span>
+<img src="Similitud_files/figure-html/bray-1.png" alt="Arreglo de las parcelas en distancias multidimensionales no métricas (NMDS). Estas dos figuras muestran los mismos datos en bruto, pero las distancias euclidianas tienden a enfatizar las diferencias debidas a las especies más abundantes, mientras que Bray-Curtis no lo hace." width="624" />
+<p class="caption">
+Figure 4.1: Arreglo de las parcelas en distancias multidimensionales no métricas (NMDS). Estas dos figuras muestran los mismos datos en bruto, pero las distancias euclidianas tienden a enfatizar las diferencias debidas a las especies más abundantes, mientras que Bray-Curtis no lo hace.
+</p>
+</div>
+<p>Como podemos apreciar en el caso del ejemplo, la distancia de Bray-Curtis recupera la idea de un gradiente entre las comunidades, desde la comunidad A a la C. En el caso de la distancia Euclidiana las comunidades B y C se encuentran a igual distancia de la comunidad A, como un efecto del doble cero.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="índices-de-similitud.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformación-y-estandarización-de-datos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Similitud.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Similitud.pdf", "Similitud.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
